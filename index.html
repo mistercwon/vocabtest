@@ -33,7 +33,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 1.2em;
-		box-sizing: border-box; /* Ensure padding is included in width calculation */
+            box-sizing: border-box; /* Ensure padding is included in width calculation */
         }
         button {
             padding: 12px 24px;
@@ -74,42 +74,40 @@
             font-size: 1em;
             color: #555;
         }
-	.word-navigation {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.word-navigation button {
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: #007BFF;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.word-navigation button:hover {
-    background-color: #ddd;
-}
+        .word-navigation {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .word-navigation button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007BFF;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .word-navigation button:hover {
+            background-color: #ddd;
+        }
 
         .test-mode {
             border: 3px solid #f44336;
             background-color: #fff4f4;
         }
-	.updated-info {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    font-size: 0.9em;
-    color: #555;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
+        .updated-info {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.9em;
+            color: #555;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
 
     </style>
 </head>
@@ -117,16 +115,16 @@
     <div class="container">
         <h1>Word Quiz</h1>
         <div class="controls">
-    <label for="version-select">Version:</label>
-    <select id="version-select" onchange="changeVersion()">
-        <!-- Versions will be populated dynamically -->
-    </select>
+            <label for="version-select">Version:</label>
+            <select id="version-select" onchange="changeVersion()">
+                <!-- Versions will be populated dynamically -->
+            </select>
 
-    <label for="chapter-select">Chapter:</label>
-    <select id="chapter-select" onchange="changeChapter()">
-        <!-- Chapters will be populated dynamically -->
-    </select>
-</div>
+            <label for="chapter-select">Chapter:</label>
+            <select id="chapter-select" onchange="changeChapter()">
+                <!-- Chapters will be populated dynamically -->
+            </select>
+        </div>
 
         <div class="controls">
             <label>
@@ -159,14 +157,14 @@
         <button id="test-mode-btn" onclick="startTestMode()">Test Mode</button>
         <p id="result"></p>
         <p id="word-info"></p>
-<div class="word-navigation">
-    <button id="prev-word-btn" onclick="navigateWord(-1)">← Previous</button>
-    <button id="next-word-btn" onclick="navigateWord(1)">Next →</button>
-</div>
-<div class="updated-info">
-    Last Updated: <span id="last-updated"></span>
-</div>
-
+        <div class="word-navigation">
+            <button id="prev-word-btn" onclick="navigateWord(-1)">← Previous</button>
+            <button id="next-word-btn" onclick="navigateWord(1)">Next →</button>
+        </div>
+        <div class="updated-info">
+            Last Updated: <span id="last-updated"></span>
+        </div>
+    </div>
 
     <script>
 const wordLists = {
@@ -2076,6 +2074,14 @@ function updateChapterDropdown() {
     chapterSelect.value = chapters[0];
 }
 
+function updateChapterDropdown() {
+            const chapterSelect = document.getElementById("chapter-select");
+            const chapters = wordLists[currentVersion];
+            const chapterKeys = Object.keys(chapters);
+
+            chapterSelect.innerHTML = chapterKeys.map(chapter => `<option value="${chapter}">${chapter}</option>`).join("");
+        }
+	    
 // Event handler for changing the version
 function changeVersion() {
     const versionSelect = document.getElementById("version-select");
@@ -2313,7 +2319,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 2"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 3"; // Static date
 
 
 
