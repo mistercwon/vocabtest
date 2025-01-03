@@ -1988,8 +1988,9 @@ const wordLists = {
 
         function loadWord() {
 
-		if (isRandom) {
-        currentWordList = shuffleArray(currentWordList);
+		// Determine the index to use
+    if (isRandom) {
+        currentIndex = Math.floor(Math.random() * currentWordList.length);
     }
             const item = currentWordList[currentIndex];
             const wordDisplay = document.getElementById("word-display");
@@ -2346,7 +2347,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 13"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 14"; // Static date
 
 
 
