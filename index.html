@@ -1982,8 +1982,7 @@ const wordLists = {
         function initialize() {
     populateVersions();  // Automatically populate version dropdown
     populateChapters();  // Automatically populate chapter dropdown
-		currentWordList = getCombinedWordList();
-
+	currentIndex=0;
     loadWord();          // Load the first word
 }
 
@@ -2276,7 +2275,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 3"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 4"; // Static date
 
 
 
