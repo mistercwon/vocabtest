@@ -2074,7 +2074,14 @@ function updateChapterDropdown() {
     chapterSelect.value = chapters[0];
 }
 
+function updateChapterDropdown() {
+            const chapterSelect = document.getElementById("chapter-select");
+            const chapters = wordLists[currentVersion];
+            const chapterKeys = Object.keys(chapters);
 
+            chapterSelect.innerHTML = chapterKeys.map(chapter => `<option value="${chapter}">${chapter}</option>`).join("");
+        }
+	    
 // Event handler for changing the version
 function changeVersion() {
     const versionSelect = document.getElementById("version-select");
@@ -2113,6 +2120,10 @@ function updateSpecialCharacters() {
             loadWord();
         }
        
+// Initialize the dropdowns and set default values when the page loads
+document.addEventListener("DOMContentLoaded", () => {
+    populateVersionDropdown();  // Populate the version dropdown
+});
 
 
 
@@ -2303,7 +2314,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 9"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 7"; // Static date
 
 
 
