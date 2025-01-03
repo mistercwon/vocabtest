@@ -269,8 +269,6 @@ function changeVersion() {
 
        
 
-
-
 function checkAnswer() {
     const userAnswer = document.getElementById("answer").value.trim().toLowerCase();
     const currentWordIndex = testMode ? testWordOrder[testIndex] : currentIndex;
@@ -289,7 +287,7 @@ function checkAnswer() {
             if (wrongOnFirstTry.has(currentWordIndex)) {
                 wrongOnFirstTry.delete(currentWordIndex);
             }
-            testIndex++;
+            testIndex++; // Only advance when correct
             setTimeout(() => loadTestWord(), 2000);
         } else {
             currentIndex = (currentIndex + 1) % currentWordList.length;
@@ -304,13 +302,14 @@ function checkAnswer() {
 
         if (testMode) {
             wrongOnFirstTry.add(currentWordIndex); // Track as wrong
+            setTimeout(() => {
+                resultElement.innerText = ""; // Clear result
+            }, 2000); // Don't advance to the next word
         }
-
-        setTimeout(() => {
-            resultElement.innerText = ""; // Clear result
-        }, 2000);
     }
 }
+
+
 
 
 
