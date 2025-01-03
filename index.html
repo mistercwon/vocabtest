@@ -2110,16 +2110,13 @@ function updateChapterDropdown() {
     chapterSelect.value = chapterKeys[0] || "all"; // Ensure "all" is selected if no chapters are available
 }
 	    
-// Event handler for changing the version
 function changeVersion() {
     const versionSelect = document.getElementById("version-select");
-    currentVersion = versionSelect.value; // Update the version
-    currentWordList = getCombinedWordList(); // Rebuild the word list
-    currentChapter = "all"; // Reset the chapter selection
-    document.getElementById("chapter-select").value = "all"; // Reset the dropdown
-    populateVersionDropdown();
-    updateChapterDropdown(); // Update the chapter dropdown based on the selected version
-    initialize(); // Reload the words and UI
+    currentVersion = versionSelect.value; // Update currentVersion to the selected version
+
+    // Update the chapter dropdown and load the word list for the selected version
+    updateChapterDropdown();
+    changeChapter();  // Update word list based on version and chapter
 }
 
 // Function to update special characters visibility (for French mode)
@@ -2344,7 +2341,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 10"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 11"; // Static date
 
 
 
