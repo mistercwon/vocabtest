@@ -2090,6 +2090,7 @@ function changeVersion() {
     // Update the chapters dropdown based on selected version
     updateChapterDropdown();
     changeChapter();  // Update the content based on the selected chapter
+	loadword();
 }
 // Function to update special characters visibility (for French mode)
 function updateSpecialCharacters() {
@@ -2120,10 +2121,8 @@ function changeChapter() {
         // Select the specific chapter
         currentWordList = wordLists[selectedVersion][selectedChapter];
     }
-	loadWord();
+	loadword();
 
-    // Log or use currentWordList for further processing
-    console.log(currentWordList);  // This will show the current word list based on version and chapter
 }
        
 // Initialize the dropdowns and set default values when the page loads
@@ -2320,7 +2319,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 4"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 5"; // Static date
 
 
 
