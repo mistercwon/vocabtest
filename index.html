@@ -2041,8 +2041,13 @@ function populateVersionDropdown() {
     });
 
     // Set default version to first one in the list
-    versionSelect.value = Object.keys(wordLists)[0];
-    updateChapterDropdown();  // Call to update chapters based on the default version
+    const defaultVersion = Object.keys(wordLists)[0];
+    versionSelect.value = defaultVersion;
+
+    // Update the chapter dropdown based on the default version
+    currentVersion = defaultVersion;  // Set the current version
+    updateChapterDropdown();  // Update chapters for the selected version
+    changeChapter();  // Load the first chapter or "all"
 }
 
 // Function to update the chapter dropdown dynamically based on selected version
@@ -2339,7 +2344,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 9"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 10"; // Static date
 
 
 
