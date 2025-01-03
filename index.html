@@ -133,6 +133,10 @@
             <label>
                 <input type="checkbox" id="swap-toggle" onchange="toggleSwap()"> Swap Word/Definition
             </label>
+		<label>
+    <input type="checkbox" id="diacritics-toggle" onchange="toggleDiacritics()"> Show Diacritics
+</label>
+
         </div>
         <p id="word-display"></p>
         <div class="special-characters" id="special-characters" style="display: none;">
@@ -2347,7 +2351,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 14"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 15"; // Static date
 
 
 
@@ -2356,6 +2360,18 @@ function insertCharacter(character) {
     answerField.value += character;  // Append the character to the input field
     answerField.focus();  // Keep the focus on the input field
 }
+
+	    function toggleDiacritics() {
+    const diacriticsCheckbox = document.getElementById("diacritics-toggle");
+    const specialCharsContainer = document.getElementById("special-characters");
+
+    if (diacriticsCheckbox.checked) {
+        specialCharsContainer.style.display = "flex"; // Show diacritics
+    } else {
+        specialCharsContainer.style.display = "none"; // Hide diacritics
+    }
+}
+
 
 
         function shuffleArray(array) {
