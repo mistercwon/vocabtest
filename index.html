@@ -302,13 +302,13 @@ function checkAnswer() {
 
         if (testMode) {
             testIndex++;
-            setTimeout(() => loadTestWord(), 2000);
+            setTimeout(() => loadTestWord(), 200);
         } else {
             currentIndex = (currentIndex + 1) % currentWordList.length;
             setTimeout(() => {
                 resultElement.innerText = ""; // Clear result
                 loadWord();
-            }, 2000);
+            }, 200);
         }
     } else {
         resultElement.innerText = "Wrong! Try again!";
@@ -320,7 +320,7 @@ function checkAnswer() {
 
         setTimeout(() => {
             resultElement.innerText = ""; // Clear result
-        }, 2000);
+        }, 200);
     }
 }
 
@@ -432,8 +432,10 @@ function loadTestWord() {
         if (wrongOnFirstTry.size > 0) {
             alert(`You had ${wrongOnFirstTry.size} wrong answers. Starting a new cycle.`);
            let newCycleOrder = [...testWordOrder];
+          
+		 // Add wrong words (words themselves, not the indices) to the cycle again
             wrongOnFirstTry.forEach(wrongIndex => {
-                newCycleOrder.push(wrongIndex); // Add wrong words again for the next cycle
+                newCycleOrder.push(testWordOrder[wrongIndex]); // Add word itself to the next cycle
             });
 
             // Update the order to reflect the new cycle with wrong words twice
