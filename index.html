@@ -271,8 +271,8 @@ function changeVersion() {
 
 function checkAnswer() {
     const userAnswer = document.getElementById("answer").value.trim().toLowerCase();
-    const currentWordIndex = testMode ? testWordOrder[testIndex] : currentIndex;
-    const currentWord = currentWordList[currentWordIndex];
+    const currentWordIndex = testMode ? testIndex : currentIndex;
+    const currentWord = testMode ? testWordOrder[testIndex] : currentWordList[currentWordIndex];
     const correctAnswers = swapWordAndDefinition
         ? [currentWord.word.toLowerCase()]
         : currentWord.definition.map(def => def.toLowerCase());
@@ -284,9 +284,6 @@ function checkAnswer() {
         resultElement.style.color = "green";
 
         if (testMode) {
-            if (wrongOnFirstTry.has(currentWordIndex)) {
-                wrongOnFirstTry.delete(currentWordIndex);
-            }
             testIndex++; // Only advance when correct
             setTimeout(() => loadTestWord(), 2000);
         } else {
