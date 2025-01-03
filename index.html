@@ -2276,6 +2276,11 @@ document.getElementById("last-updated").innerText = getSeoulTime();
 
 
 
+function insertCharacter(character) {
+    const answerField = document.getElementById("answer");
+    answerField.value += character;  // Append the character to the input field
+    answerField.focus();  // Keep the focus on the input field
+}
 
 
         function shuffleArray(array) {
