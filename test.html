@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            font-size: 1.2em;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        select {
+            padding: 5px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1.2em;
+		box-sizing: border-box; /* Ensure padding is included in width calculation */
+        }
+        button {
+            padding: 12px 24px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 15px;
+            font-size: 1.2em;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .special-characters {
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            gap: 10px;
+        }
+        .special-characters button {
+            padding: 8px 12px;
+            font-size: 1.5em;
+        }
+        #word-info {
+            margin-top: 15px;
+            font-size: 1em;
+            color: #555;
+        }
+	.word-navigation {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.word-navigation button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #007BFF;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.word-navigation button:hover {
+    background-color: #ddd;
+}
+
+        .test-mode {
+            border: 3px solid #f44336;
+            background-color: #fff4f4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Word Quiz</h1>
+        <div class="controls">
+            <label for="version-select">Version:</label>
+            <select id="version-select" onchange="changeVersion()">
+                <option value="english">English</option>
+                <option value="french">French</option>
+            </select>
+            <label for="chapter-select">Chapter:</label>
+            <select id="chapter-select" onchange="changeChapter()">
+                <option value="all">All</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
+        </div>
+        <div class="controls">
+            <label>
+                <input type="checkbox" id="random-toggle" onchange="toggleRandom()"> Random
+            </label>
+            <label>
+                <input type="checkbox" id="swap-toggle" onchange="toggleSwap()"> Swap Word/Definition
+            </label>
+        </div>
+        <p id="word-display"></p>
+        <div class="special-characters" id="special-characters" style="display: none;">
+            <button onclick="insertCharacter('à')">à</button>
+            <button onclick="insertCharacter('â')">â</button>
+            <button onclick="insertCharacter('ç')">ç</button>
+            <button onclick="insertCharacter('é')">é</button>
+            <button onclick="insertCharacter('è')">è</button>
+            <button onclick="insertCharacter('ê')">ê</button>
+            <button onclick="insertCharacter('ë')">ë</button>
+            <button onclick="insertCharacter('î')">î</button>
+            <button onclick="insertCharacter('ï')">ï</button>
+            <button onclick="insertCharacter('ô')">ô</button>
+            <button onclick="insertCharacter('œ')">œ</button>
+            <button onclick="insertCharacter('ù')">ù</button>
+            <button onclick="insertCharacter('û')">û</button>
+            <button onclick="insertCharacter('ü')">ü</button>
+        </div>
+        <input type="text" id="answer" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+        <button data-action="toggle-answer" onclick="toggleAnswer()">Show Answer</button>
+        <button onclick="checkAnswer()">Submit</button>
+        <button id="test-mode-btn" onclick="startTestMode()">Test Mode</button>
+        <p id="result"></p>
+        <p id="word-info"></p>
+<div class="word-navigation">
+    <button id="prev-word-btn" onclick="navigateWord(-1)">← Previous</button>
+    <button id="next-word-btn" onclick="navigateWord(1)">Next →</button>
+</div>
+
+    </div>
+
+    <script>
+        const wordLists = {
+            english: {
+                1: [
+                    { word: "loquacious", definition: ["talkative", "verbose"] },
+                    { word: "ephemeral", definition: ["short-lived", "temporary"] },
+                    { word: "benevolent", definition: ["kind and generous"] }
+                ],
+                2: [
+                    { word: "aberration", definition: ["a deviation from the norm"] },
+                    { word: "capricious", definition: ["impulsive", "unpredictable"] },
+                    { word: "enigma", definition: ["a puzzle", "a mystery"] }
+                ]
+            },
+            french: {
+                1: [
+                    { word: "bonjour", definition: ["hello"] },
+                    { word: "au revoir", definition: ["goodbye"] },
+                    { word: "merci", definition: ["thank you"] }
+                ],
+                2: [
+                    { word: "chat", definition: ["cat"] },
+                    { word: "chien", definition: ["dog"] },
+                    { word: "maison", definition: ["house"] }
+                ]
+            }
+        };
+
+        let currentVersion = "english";
+        let currentChapter = "all";
+        let currentWordList = [];
+        let currentIndex = 0;
+        let isRandom = false;
+        let swapWordAndDefinition = false;
+        let testMode = false;
+        let testWordOrder = [];
+        let testIndex = 0;
+	let wrongOnFirstTry = new Set(); // Tracks words answered wrong at least once
+	let testAttempt = 1;
+
+
+        function initialize() {
+            currentWordList = getCombinedWordList();
+            loadWord();
+        }
+
+        function getCombinedWordList() {
+            return Object.values(wordLists[currentVersion]).flat();
+        }
+
+        function loadWord() {
+            const item = currentWordList[currentIndex];
+            const wordDisplay = document.getElementById("word-display");
+
+            if (!item) {
+                wordDisplay.innerText = "No words available.";
+                return;
+            }
+
+            if (swapWordAndDefinition) {
+                wordDisplay.innerText = `Definition: ${item.definition.join(", ")}`;
+            } else {
+                wordDisplay.innerText = `Word: ${item.word}`;
+            }
+
+            document.getElementById("answer").value = "";
+            document.getElementById("result").innerText = "";
+	document.getElementById("word-info").innerText = `Word ${currentIndex + 1}/${currentWordList.length}`; // Update progress
+        }
+
+        function toggleAnswer() {
+            const resultElement = document.getElementById("result");
+            const toggleButton = document.querySelector('button[data-action="toggle-answer"]');
+            const currentWord = testMode 
+                ? currentWordList[testWordOrder[testIndex]] 
+                : currentWordList[currentIndex];
+
+            if (toggleButton.innerText === "Show Answer") {
+                const correctAnswer = swapWordAndDefinition
+                    ? currentWord.word
+                    : currentWord.definition.join(", ");
+                resultElement.innerText = `Answer: ${correctAnswer}`;
+                toggleButton.innerText = "Hide Answer";
+            } else {
+                resultElement.innerText = "";
+                toggleButton.innerText = "Show Answer";
+            }
+        }
+
+function changeVersion() {
+    const versionSelect = document.getElementById("version-select");
+    currentVersion = versionSelect.value; // Update the version
+    currentWordList = getCombinedWordList(); // Rebuild the word list
+    currentChapter = "all"; // Reset the chapter selection
+    document.getElementById("chapter-select").value = "all"; // Reset the dropdown
+    initialize(); // Reload the words and UI
+}
+
+
+        function changeChapter() {
+            const chapterSelect = document.getElementById("chapter-select");
+            currentChapter = chapterSelect.value;
+
+            if (currentChapter === "all") {
+                currentWordList = getCombinedWordList();
+            } else {
+                currentWordList = wordLists[currentVersion][currentChapter];
+            }
+
+            currentIndex = 0;
+            loadWord();
+        }
+
+       
+
+
+
+function checkAnswer() {
+    const userAnswer = document.getElementById("answer").value.trim().toLowerCase();
+    const currentWordIndex = testMode ? testWordOrder[testIndex] : currentIndex;
+    const currentWord = currentWordList[currentWordIndex];
+    const correctAnswers = swapWordAndDefinition
+        ? [currentWord.word.toLowerCase()]
+        : currentWord.definition.map(def => def.toLowerCase());
+
+    const resultElement = document.getElementById("result");
+
+    if (correctAnswers.includes(userAnswer)) {
+        resultElement.innerText = "Correct!";
+        resultElement.style.color = "green";
+
+        if (testMode) {
+            if (wrongOnFirstTry.has(currentWordIndex)) {
+                wrongOnFirstTry.delete(currentWordIndex);
+            }
+            testIndex++;
+            setTimeout(() => loadTestWord(), 2000);
+        } else {
+            currentIndex = (currentIndex + 1) % currentWordList.length;
+            setTimeout(() => {
+                resultElement.innerText = ""; // Clear result
+                loadWord();
+            }, 2000);
+        }
+    } else {
+        resultElement.innerText = "Wrong! Try again!";
+        resultElement.style.color = "red";
+
+        if (testMode) {
+            wrongOnFirstTry.add(currentWordIndex); // Track as wrong
+        }
+
+        setTimeout(() => {
+            resultElement.innerText = ""; // Clear result
+        }, 2000);
+    }
+}
+
+
+
+function navigateWord(direction) {
+    if (testMode) {
+        alert("Navigation is not allowed in Test Mode.");
+        return;
+    }
+
+    currentIndex += direction;
+
+    // Wrap around if out of bounds
+    if (currentIndex < 0) {
+        currentIndex = currentWordList.length - 1;
+    } else if (currentIndex >= currentWordList.length) {
+        currentIndex = 0;
+    }
+
+    loadWord();
+}
+
+
+
+        function toggleRandom() {
+            isRandom = document.getElementById("random-toggle").checked;
+            loadWord();
+        }
+
+        function toggleSwap() {
+            swapWordAndDefinition = document.getElementById("swap-toggle").checked;
+            loadWord();
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                checkAnswer();
+            }
+        }
+
+function startTestMode() {
+    if (testMode) {
+        endTestMode();
+        return;
+    }
+
+   if (currentChapter === "all") {
+        const currentWord = currentWordList[currentIndex];
+        let foundChapter = null;
+
+        // Determine which chapter the current word belongs to
+        for (const [chapter, words] of Object.entries(wordLists[currentVersion])) {
+            if (words.some(word => word.word === currentWord.word)) {
+                foundChapter = chapter;
+                break;
+            }
+        }
+
+        if (foundChapter) {
+            currentChapter = foundChapter;
+            const chapterSelect = document.getElementById("chapter-select");
+            chapterSelect.value = foundChapter; // Update the dropdown visually
+            changeChapter(); // Update the word list to the selected chapter
+        } else {
+            alert("Unable to determine the chapter of the current word.");
+            return;
+        }
+    }
+
+    testMode = true;
+    testWordOrder = shuffleArray([...Array(currentWordList.length).keys()]);
+    testIndex = 0;
+    wrongOnFirstTry.clear(); // Reset for the new test
+testAttempt=1;
+
+
+    const button = document.getElementById("test-mode-btn");
+    button.innerText = "End Test Mode";
+    button.style.backgroundColor = "#f44336";
+    document.querySelector(".container").classList.add("test-mode");
+
+	const randomCheckbox = document.getElementById("random-toggle");
+    randomCheckbox.disabled = true; // Disable the checkbox
+
+    loadTestWord();
+}
+
+
+
+        function endTestMode() {
+	
+            testMode = false;
+            const button = document.getElementById("test-mode-btn");
+            button.innerText = "Test Mode";
+		document.querySelector(".container").classList.remove("test-mode"); // Remove test-mode styling
+
+	const randomCheckbox = document.getElementById("random-toggle");
+    randomCheckbox.disabled = false; // Re-enable the checkbox
+
+            loadWord();
+        }
+
+       
+
+
+function loadTestWord() {
+    if (testIndex >= testWordOrder.length) {
+        if (wrongOnFirstTry.size > 0) {
+            alert(`You had ${wrongOnFirstTry.size} wrong answers. Retrying...`);
+
+            // Create a new cycle with double entries for wrong words
+            const wrongArray = [...wrongOnFirstTry];
+            testWordOrder = shuffleArray([
+                ...Array(currentWordList.length).keys(), // All words
+                ...wrongArray // Double entries for wrong words
+            ]);
+
+	testAttempt++; // Increment the attempt counter
+            wrongOnFirstTry.clear(); // Clear for the new cycle
+            testIndex = 0;
+            loadTestWord(); // Start next cycle immediately
+        } else {
+            alert("Test complete! You answered all words correctly on the first try.");
+            endTestMode();
+        }
+        return;
+    }
+
+    const currentTestWord = currentWordList[testWordOrder[testIndex]];
+    const wordDisplay = document.getElementById("word-display");
+
+    if (swapWordAndDefinition) {
+        wordDisplay.innerText = `Definition: ${currentTestWord.definition.join(", ")}`;
+    } else {
+        wordDisplay.innerText = `Word: ${currentTestWord.word}`;
+    }
+
+    document.getElementById("answer").value = "";
+    document.getElementById("result").innerText = "";
+document.getElementById("word-info").innerText = `Test Attempt #${testAttempt} | Problem ${testIndex + 1}/${testWordOrder.length}`; // Update progress
+
+    const showAnswerButton = document.querySelector('button[data-action="toggle-answer"]');
+    showAnswerButton.innerText = "Show Answer";
+}
+
+
+
+
+
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        initialize();
+    </script>
+</body>
+</html>
