@@ -2035,7 +2035,21 @@ function changeVersion() {
     currentChapter = "all"; // Reset the chapter selection
     document.getElementById("chapter-select").value = "all"; // Reset the dropdown
     initialize(); // Reload the words and UI
+    updateSpecialCharacters(); // Update special characters visibility
 }
+
+// Function to update special characters visibility (for French mode)
+function updateSpecialCharacters() {
+    const specialCharsContainer = document.getElementById("special-characters");
+
+    // Show special characters only if French version is selected
+    if (currentVersion === "french") {
+        specialCharsContainer.style.display = "flex"; // Show
+    } else {
+        specialCharsContainer.style.display = "none"; // Hide
+    }
+}
+
 
 
         function changeChapter() {
