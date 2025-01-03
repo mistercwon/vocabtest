@@ -302,13 +302,13 @@ function checkAnswer() {
 
         if (testMode) {
             testIndex++;
-            setTimeout(() => loadTestWord(), 200);
+            setTimeout(() => loadTestWord(), 500);
         } else {
             currentIndex = (currentIndex + 1) % currentWordList.length;
             setTimeout(() => {
                 resultElement.innerText = ""; // Clear result
                 loadWord();
-            }, 200);
+            }, 500);
         }
     } else {
         resultElement.innerText = "Wrong! Try again!";
@@ -320,7 +320,7 @@ function checkAnswer() {
 
         setTimeout(() => {
             resultElement.innerText = ""; // Clear result
-        }, 200);
+        }, 500);
     }
 }
 
@@ -438,9 +438,11 @@ function loadTestWord() {
                 newCycleOrder.push(testWordOrder[wrongIndex]); // Add word itself to the next cycle
             });
 
+				wrongOnFirstTry.clear();
+
             // Update the order to reflect the new cycle with wrong words twice
             testWordOrder = shuffleArray(newCycleOrder);
-		wrongOnFirstTry.clear();
+
             testIndex = 0;
             testAttempt++; // Increment attempt counter
             loadTestWord(); // Start the new cycle
