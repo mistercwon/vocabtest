@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -289,14 +289,16 @@ function checkAnswer() {
         } else {
             currentIndex = (currentIndex + 1) % currentWordList.length;
             setTimeout(() => {
-                loadWord(), 2000);
+                resultElement.innerText = ""; // Clear result
+                loadWord();
+            }, 2000);
         }
     } else {
         resultElement.innerText = "Wrong! Try again!";
         resultElement.style.color = "red";
 
         if (testMode) {
-            wrongOnFirstTry.add(currentWord); // Track as wrong
+            wrongOnFirstTry.add(currentWordIndex); // Track as wrong
             setTimeout(() => {
                 resultElement.innerText = ""; // Clear result
             }, 2000); // Don't advance to the next word
