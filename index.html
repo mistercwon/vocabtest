@@ -2075,12 +2075,33 @@ function updateChapterDropdown() {
 }
 
 function updateChapterDropdown() {
-            const chapterSelect = document.getElementById("chapter-select");
-            const chapters = wordLists[currentVersion];
-            const chapterKeys = Object.keys(chapters);
+    const chapterSelect = document.getElementById("chapter-select");
+    const selectedVersion = currentVersion; // Get selected version
+    const versionWordList = wordLists[selectedVersion]; // Get word list for selected version
 
-            chapterSelect.innerHTML = chapterKeys.map(chapter => `<option value="${chapter}">${chapter}</option>`).join("");
-        }
+    // Get the chapter keys for the selected version
+    const chapterKeys = Object.keys(versionWordList);
+    
+    // Clear current options
+    chapterSelect.innerHTML = "";
+
+    // Populate chapter dropdown dynamically
+    chapterKeys.forEach(chapter => {
+        const option = document.createElement('option');
+        option.value = chapter;
+        option.textContent = `Chapter ${chapter}`;
+        chapterSelect.appendChild(option);
+    });
+
+    // Add "All" option to allow the user to select all chapters
+    const allOption = document.createElement('option');
+    allOption.value = "all";
+    allOption.textContent = "All";
+    chapterSelect.appendChild(allOption);
+
+    // Set default chapter to the first available chapter
+    chapterSelect.value = chapterKeys[0] || "all"; // Ensure "all" is selected if no chapters are available
+}
 	    
 // Event handler for changing the version
 function changeVersion() {
@@ -2314,7 +2335,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 7"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 8"; // Static date
 
 
 
