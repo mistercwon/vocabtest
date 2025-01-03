@@ -269,10 +269,12 @@ function changeVersion() {
 
        
 
+
+
 function checkAnswer() {
     const userAnswer = document.getElementById("answer").value.trim().toLowerCase();
-    const currentWordIndex = testMode ? testIndex : currentIndex;
-    const currentWord = testMode ? testWordOrder[testIndex] : currentWordList[currentWordIndex];
+    const currentWordIndex = testMode ? testWordOrder[testIndex] : currentIndex;
+    const currentWord = currentWordList[currentWordIndex];
     const correctAnswers = swapWordAndDefinition
         ? [currentWord.word.toLowerCase()]
         : currentWord.definition.map(def => def.toLowerCase());
@@ -284,7 +286,10 @@ function checkAnswer() {
         resultElement.style.color = "green";
 
         if (testMode) {
-            testIndex++; // Only advance when correct
+            if (wrongOnFirstTry.has(currentWordIndex)) {
+                wrongOnFirstTry.delete(currentWordIndex);
+            }
+            testIndex++;
             setTimeout(() => loadTestWord(), 2000);
         } else {
             currentIndex = (currentIndex + 1) % currentWordList.length;
@@ -299,14 +304,13 @@ function checkAnswer() {
 
         if (testMode) {
             wrongOnFirstTry.add(currentWordIndex); // Track as wrong
-            setTimeout(() => {
-                resultElement.innerText = ""; // Clear result
-            }, 2000); // Don't advance to the next word
         }
+
+        setTimeout(() => {
+            resultElement.innerText = ""; // Clear result
+        }, 2000);
     }
 }
-
-
 
 
 
