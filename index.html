@@ -2055,20 +2055,22 @@ function updateChapterDropdown() {
 
     const selectedVersion = versionSelect.value;
 
+	 // Add "All" option for the user to select all chapters
+    const allOption = document.createElement('option');
+    allOption.value = "all";
+    allOption.textContent = "All";
+    chapterSelect.appendChild(allOption);
+
     // Populate chapter dropdown dynamically based on the selected version
     const chapters = Object.keys(wordLists[selectedVersion]);
     chapters.forEach(chapter => {
         const option = document.createElement('option');
         option.value = chapter;
-        option.textContent = `Chapter ${chapter}`;
+        option.textContent = `${chapter}`;
         chapterSelect.appendChild(option);
     });
 
-    // Add "All" option for the user to select all chapters
-    const allOption = document.createElement('option');
-    allOption.value = "all";
-    allOption.textContent = "All";
-    chapterSelect.appendChild(allOption);
+   
 
     // Set default chapter to the first one in the list
     chapterSelect.value = chapters[0];
@@ -2110,6 +2112,8 @@ function changeVersion() {
     currentWordList = getCombinedWordList(); // Rebuild the word list
     currentChapter = "all"; // Reset the chapter selection
     document.getElementById("chapter-select").value = "all"; // Reset the dropdown
+    populateVersionDropdown();
+    updateChapterDropdown(); // Update the chapter dropdown based on the selected version
     initialize(); // Reload the words and UI
 }
 
@@ -2335,7 +2339,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 8"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 9"; // Static date
 
 
 
