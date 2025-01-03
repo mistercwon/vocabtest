@@ -297,7 +297,9 @@ function checkAnswer() {
 
         if (testMode) {
             wrongOnFirstTry.add(currentWord); // Track as wrong
-
+            setTimeout(() => {
+                resultElement.innerText = ""; // Clear result
+            }, 2000); // Don't advance to the next word
         }
     }
 }
