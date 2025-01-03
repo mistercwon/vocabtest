@@ -440,6 +440,7 @@ function loadTestWord() {
 
             // Update the order to reflect the new cycle with wrong words twice
             testWordOrder = shuffleArray(newCycleOrder);
+		wrongOnFirstTry.clear();
             testIndex = 0;
             testAttempt++; // Increment attempt counter
             loadTestWord(); // Start the new cycle
