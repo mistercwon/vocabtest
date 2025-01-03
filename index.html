@@ -288,8 +288,8 @@ function changeVersion() {
 
 function checkAnswer() {
     const userAnswer = document.getElementById("answer").value.trim().toLowerCase();
-    const currentWordIndex = testMode ? testWordOrder[testIndex] : currentIndex;
-    const currentWord = currentWordList[currentWordIndex];
+    const currentWordIndex = testMode ? testIndex : currentIndex;
+    const currentWord = testMode ? currentWordList[testWordOrder[testIndex]] : currentWordList[currentWordIndex];
     const correctAnswers = swapWordAndDefinition
         ? [currentWord.word.toLowerCase()]
         : currentWord.definition.map(def => def.toLowerCase());
@@ -431,8 +431,13 @@ function loadTestWord() {
     if (testIndex >= testWordOrder.length) {
         if (wrongOnFirstTry.size > 0) {
             alert(`You had ${wrongOnFirstTry.size} wrong answers. Starting a new cycle.`);
-            testWordOrder = shuffleArray([...Array(currentWordList.length).keys()]); // New cycle
-	 wrongOnFirstTry.clear();
+           let newCycleOrder = [...testWordOrder];
+            wrongOnFirstTry.forEach(wrongIndex => {
+                newCycleOrder.push(wrongIndex); // Add wrong words again for the next cycle
+            });
+
+            // Update the order to reflect the new cycle with wrong words twice
+            testWordOrder = shuffleArray(newCycleOrder);
             testIndex = 0;
             testAttempt++; // Increment attempt counter
             loadTestWord(); // Start the new cycle
