@@ -1990,25 +1990,28 @@ const wordLists = {
             return Object.values(wordLists[currentVersion]).flat();
         }
 
-        function loadWord() {
-            const item = currentWordList[currentIndex];
-            const wordDisplay = document.getElementById("word-display");
+    function loadWord() {
+    console.log("currentWordList: ", currentWordList); // Debugging: Check the contents of the word list
+    const item = currentWordList[currentIndex]; // Get current word
+    const wordDisplay = document.getElementById("word-display");
 
-            if (!item) {
-                wordDisplay.innerText = "No words available.";
-                return;
-            }
+    if (!item) {
+        wordDisplay.innerText = "No words available."; // If no words, display a message
+        return;
+    }
 
-            if (swapWordAndDefinition) {
-                wordDisplay.innerText = `Definition: ${item.definition.join(", ")}`;
-            } else {
-                wordDisplay.innerText = `Word: ${item.word}`;
-            }
+    if (swapWordAndDefinition) {
+        wordDisplay.innerText = `Definition: ${item.definition.join(", ")}`; // Show definition
+    } else {
+        wordDisplay.innerText = `Word: ${item.word}`; // Show word
+    }
 
-            document.getElementById("answer").value = "";
-            document.getElementById("result").innerText = "";
-	document.getElementById("word-info").innerText = `Word ${currentIndex + 1}/${currentWordList.length}`; // Update progress
-        }
+    document.getElementById("answer").value = ""; // Clear input field
+    document.getElementById("result").innerText = ""; // Clear result message
+    document.getElementById("word-info").innerText = `Word ${currentIndex + 1}/${currentWordList.length}`; // Update progress
+}
+
+
 
         function toggleAnswer() {
             const resultElement = document.getElementById("result");
@@ -2060,7 +2063,7 @@ function populateDropdowns() {
     versionSelect.innerHTML = "";
     chapterSelect.innerHTML = "";
 
-    // Populate version dropdown
+    // Populate version dropdown dynamically
     Object.keys(wordLists).forEach(version => {
         const option = document.createElement('option');
         option.value = version;
@@ -2068,10 +2071,11 @@ function populateDropdowns() {
         versionSelect.appendChild(option);
     });
 
-    // Set default version and populate chapters
-    versionSelect.value = 'english'; // Default version
-    updateChapters(); // Populate chapters based on the default version
+    // Default version
+    versionSelect.value = 'english'; // Select default version
+    updateChapters(); // Update chapters based on the selected version
 }
+
 
 function updateChapters() {
     const versionSelect = document.getElementById("version-select");
@@ -2096,19 +2100,19 @@ function updateChapters() {
 }
 
 
-     function changeChapter() {
+    function changeChapter() {
     const chapterSelect = document.getElementById("chapter-select");
     currentChapter = chapterSelect.value;
 
-    // Update word list based on selected chapter
+    // Update word list based on the selected chapter
     if (currentChapter === "all") {
-        currentWordList = getCombinedWordList(); // Combine all chapters
+        currentWordList = getCombinedWordList(); // Combine all chapters for the selected version
     } else {
         currentWordList = wordLists[currentVersion][currentChapter]; // Select words for the selected chapter
     }
 
-    currentIndex = 0;
-    loadWord(); // Load the first word from the updated word list
+    currentIndex = 0;  // Reset to the first word
+    loadWord(); // Load the first word after chapter selection
 }
 
 
