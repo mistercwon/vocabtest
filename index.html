@@ -301,9 +301,6 @@ function checkAnswer() {
         resultElement.style.color = "green";
 
         if (testMode) {
-            if (wrongOnFirstTry.has(currentWordIndex)) {
-                wrongOnFirstTry.delete(currentWordIndex);
-            }
             testIndex++;
             setTimeout(() => loadTestWord(), 2000);
         } else {
@@ -435,6 +432,7 @@ function loadTestWord() {
         if (wrongOnFirstTry.size > 0) {
             alert(`You had ${wrongOnFirstTry.size} wrong answers. Starting a new cycle.`);
             testWordOrder = shuffleArray([...Array(currentWordList.length).keys()]); // New cycle
+	 wrongOnFirstTry.clear();
             testIndex = 0;
             testAttempt++; // Increment attempt counter
             loadTestWord(); // Start the new cycle
