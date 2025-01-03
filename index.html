@@ -2085,12 +2085,13 @@ function updateChapterDropdown() {
 // Event handler for changing the version
 function changeVersion() {
     const versionSelect = document.getElementById("version-select");
-    const selectedVersion = versionSelect.value;
-
-    // Update the chapters dropdown based on selected version
-    updateChapterDropdown();
-    changeChapter();  // Update the content based on the selected chapter
+    currentVersion = versionSelect.value; // Update the version
+    currentWordList = getCombinedWordList(); // Rebuild the word list
+    currentChapter = "all"; // Reset the chapter selection
+    document.getElementById("chapter-select").value = "all"; // Reset the dropdown
+    initialize(); // Reload the words and UI
 }
+
 // Function to update special characters visibility (for French mode)
 function updateSpecialCharacters() {
     const specialCharsContainer = document.getElementById("special-characters");
@@ -2105,24 +2106,19 @@ function updateSpecialCharacters() {
 
 
 
-function changeChapter() {
-    const versionSelect = document.getElementById("version-select");
-    const chapterSelect = document.getElementById("chapter-select");
-    const selectedVersion = versionSelect.value;
-    const selectedChapter = chapterSelect.value;
+   function changeChapter() {
+            const chapterSelect = document.getElementById("chapter-select");
+            currentChapter = chapterSelect.value;
 
-    let currentWordList = [];
+            if (currentChapter === "all") {
+                currentWordList = getCombinedWordList();
+            } else {
+                currentWordList = wordLists[currentVersion][currentChapter];
+            }
 
-    if (selectedChapter === "all") {
-        // Combine all chapters if "All" is selected
-        currentWordList = Object.values(wordLists[selectedVersion]).flat();
-    } else {
-        // Select the specific chapter
-        currentWordList = wordLists[selectedVersion][selectedChapter];
-    }
-	intialize();
-
-}
+            currentIndex = 0;
+            loadWord();
+        }
        
 // Initialize the dropdowns and set default values when the page loads
 document.addEventListener("DOMContentLoaded", () => {
@@ -2318,7 +2314,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 6"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 7"; // Static date
 
 
 
