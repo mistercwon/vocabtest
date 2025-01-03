@@ -418,19 +418,12 @@ testAttempt=1;
 function loadTestWord() {
     if (testIndex >= testWordOrder.length) {
         if (wrongOnFirstTry.size > 0) {
-            alert(`You had ${wrongOnFirstTry.size} wrong answers. Retrying...`);
-
-            // Create a new cycle with double entries for wrong words
-            const wrongArray = [...wrongOnFirstTry];
-            testWordOrder = shuffleArray([
-                ...Array(currentWordList.length).keys(), // All words
-                ...wrongArray // Double entries for wrong words
-            ]);
-
-	testAttempt++; // Increment the attempt counter
-            wrongOnFirstTry.clear(); // Clear for the new cycle
+            alert(`You had ${wrongOnFirstTry.size} wrong answers. Starting a new cycle.`);
+            testWordOrder = shuffleArray([...Array(currentWordList.length).keys()]); // New cycle
             testIndex = 0;
-            loadTestWord(); // Start next cycle immediately
+            wrongOnFirstTry.clear(); // Reset wrong answer tracking
+            testAttempt++; // Increment attempt counter
+            loadTestWord(); // Start the new cycle
         } else {
             alert("Test complete! You answered all words correctly on the first try.");
             endTestMode();
@@ -449,11 +442,12 @@ function loadTestWord() {
 
     document.getElementById("answer").value = "";
     document.getElementById("result").innerText = "";
-document.getElementById("word-info").innerText = `Test Attempt #${testAttempt} | Problem ${testIndex + 1}/${testWordOrder.length}`; // Update progress
+    document.getElementById("word-info").innerText = `Test Attempt #${testAttempt} | Problem ${testIndex + 1}/${testWordOrder.length}`;
 
     const showAnswerButton = document.querySelector('button[data-action="toggle-answer"]');
     showAnswerButton.innerText = "Show Answer";
 }
+
 
 
 
