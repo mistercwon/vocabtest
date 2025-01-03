@@ -134,7 +134,7 @@
                 <input type="checkbox" id="swap-toggle" onchange="toggleSwap()"> Swap Word/Definition
             </label>
 		<label>
-    <input type="checkbox" id="diacritics-toggle" onchange="toggleDiacritics()"> Show Diacritics
+    <input type="checkbox" id="diacritics-toggle" onchange="toggleDiacritics()"> Hide Diacritics
 </label>
 
         </div>
@@ -2351,7 +2351,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 15"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 16"; // Static date
 
 
 
@@ -2366,9 +2366,9 @@ function insertCharacter(character) {
     const specialCharsContainer = document.getElementById("special-characters");
 
     if (diacriticsCheckbox.checked) {
-        specialCharsContainer.style.display = "flex"; // Show diacritics
-    } else {
         specialCharsContainer.style.display = "none"; // Hide diacritics
+    } else {
+        specialCharsContainer.style.display = "flex"; // Show diacritics
     }
 }
 
