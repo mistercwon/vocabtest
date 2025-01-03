@@ -117,18 +117,17 @@
     <div class="container">
         <h1>Word Quiz</h1>
         <div class="controls">
-            <label for="version-select">Version:</label>
-            <select id="version-select" onchange="changeVersion()">
-                <option value="english">English</option>
-                <option value="french">French</option>
-            </select>
-            <label for="chapter-select">Chapter:</label>
-            <select id="chapter-select" onchange="changeChapter()">
-                <option value="all">All</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-            </select>
-        </div>
+    <label for="version-select">Version:</label>
+    <select id="version-select" onchange="changeVersion()">
+        <!-- Versions will be populated dynamically -->
+    </select>
+
+    <label for="chapter-select">Chapter:</label>
+    <select id="chapter-select" onchange="changeChapter()">
+        <!-- Chapters will be populated dynamically -->
+    </select>
+</div>
+
         <div class="controls">
             <label>
                 <input type="checkbox" id="random-toggle" onchange="toggleRandom()"> Random
@@ -2028,16 +2027,64 @@ const wordLists = {
             }
         }
 
-function changeVersion() {
+	    // Function to populate the version dropdown dynamically
+function populateVersionDropdown() {
     const versionSelect = document.getElementById("version-select");
-    currentVersion = versionSelect.value; // Update the version
-    currentWordList = getCombinedWordList(); // Rebuild the word list
-    currentChapter = "all"; // Reset the chapter selection
-    document.getElementById("chapter-select").value = "all"; // Reset the dropdown
-    initialize(); // Reload the words and UI
-    updateSpecialCharacters(); // Update special characters visibility
+    
+    // Clear any existing options
+    versionSelect.innerHTML = "";
+    
+    // Populate version dropdown dynamically based on wordLists
+    Object.keys(wordLists).forEach(version => {
+        const option = document.createElement('option');
+        option.value = version;
+        option.textContent = version.charAt(0).toUpperCase() + version.slice(1);
+        versionSelect.appendChild(option);
+    });
+
+    // Set default version to first one in the list
+    versionSelect.value = Object.keys(wordLists)[0];
+    updateChapterDropdown();  // Call to update chapters based on the default version
 }
 
+// Function to update the chapter dropdown dynamically based on selected version
+function updateChapterDropdown() {
+    const versionSelect = document.getElementById("version-select");
+    const chapterSelect = document.getElementById("chapter-select");
+    
+    // Clear any existing options
+    chapterSelect.innerHTML = "";
+
+    const selectedVersion = versionSelect.value;
+
+    // Populate chapter dropdown dynamically based on the selected version
+    const chapters = Object.keys(wordLists[selectedVersion]);
+    chapters.forEach(chapter => {
+        const option = document.createElement('option');
+        option.value = chapter;
+        option.textContent = `Chapter ${chapter}`;
+        chapterSelect.appendChild(option);
+    });
+
+    // Add "All" option for the user to select all chapters
+    const allOption = document.createElement('option');
+    allOption.value = "all";
+    allOption.textContent = "All";
+    chapterSelect.appendChild(allOption);
+
+    // Set default chapter to the first one in the list
+    chapterSelect.value = chapters[0];
+}
+
+// Event handler for changing the version
+function changeVersion() {
+    const versionSelect = document.getElementById("version-select");
+    const selectedVersion = versionSelect.value;
+
+    // Update the chapters dropdown based on selected version
+    updateChapterDropdown();
+    changeChapter();  // Update the content based on the selected chapter
+}
 // Function to update special characters visibility (for French mode)
 function updateSpecialCharacters() {
     const specialCharsContainer = document.getElementById("special-characters");
@@ -2052,21 +2099,30 @@ function updateSpecialCharacters() {
 
 
 
-        function changeChapter() {
-            const chapterSelect = document.getElementById("chapter-select");
-            currentChapter = chapterSelect.value;
+function changeChapter() {
+    const versionSelect = document.getElementById("version-select");
+    const chapterSelect = document.getElementById("chapter-select");
+    const selectedVersion = versionSelect.value;
+    const selectedChapter = chapterSelect.value;
 
-            if (currentChapter === "all") {
-                currentWordList = getCombinedWordList();
-            } else {
-                currentWordList = wordLists[currentVersion][currentChapter];
-            }
+    let currentWordList = [];
 
-            currentIndex = 0;
-            loadWord();
-        }
+    if (selectedChapter === "all") {
+        // Combine all chapters if "All" is selected
+        currentWordList = Object.values(wordLists[selectedVersion]).flat();
+    } else {
+        // Select the specific chapter
+        currentWordList = wordLists[selectedVersion][selectedChapter];
+    }
 
+    // Log or use currentWordList for further processing
+    console.log(currentWordList);  // This will show the current word list based on version and chapter
+}
        
+// Initialize the dropdowns and set default values when the page loads
+document.addEventListener("DOMContentLoaded", () => {
+    populateVersionDropdown();  // Populate the version dropdown
+});
 
 
 
@@ -2257,7 +2313,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 1"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 2"; // Static date
 
 
 
