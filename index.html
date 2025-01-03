@@ -98,6 +98,19 @@
             border: 3px solid #f44336;
             background-color: #fff4f4;
         }
+	.updated-info {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: 0.9em;
+    color: #555;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
     </style>
 </head>
 <body>
@@ -151,8 +164,10 @@
     <button id="prev-word-btn" onclick="navigateWord(-1)">← Previous</button>
     <button id="next-word-btn" onclick="navigateWord(1)">Next →</button>
 </div>
+<div class="updated-info">
+    Last Updated: <span id="last-updated"></span>
+</div>
 
-    </div>
 
     <script>
         const wordLists = {
@@ -421,7 +436,6 @@ function loadTestWord() {
             alert(`You had ${wrongOnFirstTry.size} wrong answers. Starting a new cycle.`);
             testWordOrder = shuffleArray([...Array(currentWordList.length).keys()]); // New cycle
             testIndex = 0;
-            wrongOnFirstTry.clear(); // Reset wrong answer tracking
             testAttempt++; // Increment attempt counter
             loadTestWord(); // Start the new cycle
         } else {
@@ -449,6 +463,24 @@ function loadTestWord() {
 }
 
 
+function getSeoulTime() {
+    const now = new Date();
+    const seoulOffset = 9 * 60; // Seoul is UTC+9
+    const seoulTime = new Date(now.getTime() + (now.getTimezoneOffset() + seoulOffset) * 60000);
+    const options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        timeZone: "Asia/Seoul",
+        timeZoneName: "short",
+    };
+    return seoulTime.toLocaleDateString("en-US", options);
+}
+
+document.getElementById("last-updated").innerText = getSeoulTime();
 
 
 
