@@ -117,18 +117,17 @@
     <div class="container">
         <h1>Word Quiz</h1>
         <div class="controls">
-            <label for="version-select">Version:</label>
-            <select id="version-select" onchange="changeVersion()">
-                <option value="english">English</option>
-                <option value="french">French</option>
-            </select>
-            <label for="chapter-select">Chapter:</label>
-            <select id="chapter-select" onchange="changeChapter()">
-                <option value="all">All</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-            </select>
-        </div>
+    <label for="version-select">Version:</label>
+    <select id="version-select" onchange="changeVersion()">
+        <!-- Version options will be dynamically populated -->
+    </select>
+
+    <label for="chapter-select">Chapter:</label>
+    <select id="chapter-select" onchange="changeChapter()">
+        <!-- Chapter options will be dynamically populated -->
+    </select>
+</div>
+
         <div class="controls">
             <label>
                 <input type="checkbox" id="random-toggle" onchange="toggleRandom()"> Random
@@ -1981,33 +1980,43 @@ const wordLists = {
 
 
         function initialize() {
-            currentWordList = getCombinedWordList();
-            loadWord();
-        }
+    populateVersions();  // Automatically populate version dropdown
+    populateChapters();  // Automatically populate chapter dropdown
+    loadWord();          // Load the first word
+}
 
         function getCombinedWordList() {
             return Object.values(wordLists[currentVersion]).flat();
         }
 
-        function loadWord() {
-            const item = currentWordList[currentIndex];
-            const wordDisplay = document.getElementById("word-display");
+      function loadWord() {
+    const item = currentWordList[currentIndex];
+    const wordDisplay = document.getElementById("word-display");
+    const answerSection = document.getElementById("answer-section");
 
-            if (!item) {
-                wordDisplay.innerText = "No words available.";
-                return;
-            }
+    if (!item) {
+        wordDisplay.innerText = "No words available.";
+        return;
+    }
 
-            if (swapWordAndDefinition) {
-                wordDisplay.innerText = `Definition: ${item.definition.join(", ")}`;
-            } else {
-                wordDisplay.innerText = `Word: ${item.word}`;
-            }
-
-            document.getElementById("answer").value = "";
-            document.getElementById("result").innerText = "";
-	document.getElementById("word-info").innerText = `Word ${currentIndex + 1}/${currentWordList.length}`; // Update progress
-        }
+    // For French Conjugation, handle it specifically
+    if (currentVersion === "french-conjugation") {
+        wordDisplay.innerText = `Infinitive: ${item.infinitive} - Tense: ${item.tense}`;
+        answerSection.innerHTML = `
+            <label for="je">Je:</label><input type="text" id="je" placeholder="Je" value="">
+            <label for="tu">Tu:</label><input type="text" id="tu" placeholder="Tu" value="">
+            <label for="il">Il/Elle/On:</label><input type="text" id="il" placeholder="Il/Elle/On" value="">
+            <label for="nous">Nous:</label><input type="text" id="nous" placeholder="Nous" value="">
+            <label for="vous">Vous:</label><input type="text" id="vous" placeholder="Vous" value="">
+            <label for="ils">Ils/Elles:</label><input type="text" id="ils" placeholder="Ils/Elles" value="">
+        `;
+    } else {
+        // Handle word/definition display for English or French
+        wordDisplay.innerText = `Word: ${item.word}`;
+        document.getElementById("answer").value = "";
+        document.getElementById("result").innerText = "";
+    }
+}
 
         function toggleAnswer() {
             const resultElement = document.getElementById("result");
@@ -2030,12 +2039,15 @@ const wordLists = {
 
 function changeVersion() {
     const versionSelect = document.getElementById("version-select");
-    currentVersion = versionSelect.value; // Update the version
-    currentWordList = getCombinedWordList(); // Rebuild the word list
-    currentChapter = "all"; // Reset the chapter selection
-    document.getElementById("chapter-select").value = "all"; // Reset the dropdown
-    initialize(); // Reload the words and UI
-    updateSpecialCharacters(); // Update special characters visibility
+    currentVersion = versionSelect.value; // Update the current version
+    currentChapter = "all"; // Reset to "All" chapters by default
+    currentIndex = 0; // Reset index to the first word
+
+    // Populate the chapters for the selected version
+    populateChapters();
+
+    // Load the word list based on the version and chapter
+    loadWord();
 }
 
 // Function to update special characters visibility (for French mode)
@@ -2052,19 +2064,20 @@ function updateSpecialCharacters() {
 
 
 
-        function changeChapter() {
-            const chapterSelect = document.getElementById("chapter-select");
-            currentChapter = chapterSelect.value;
+       function changeChapter() {
+    const chapterSelect = document.getElementById("chapter-select");
+    currentChapter = chapterSelect.value; // Get the selected chapter
 
-            if (currentChapter === "all") {
-                currentWordList = getCombinedWordList();
-            } else {
-                currentWordList = wordLists[currentVersion][currentChapter];
-            }
+    // Get the words based on the selected version and chapter
+    if (currentChapter === "all") {
+        currentWordList = wordLists[currentVersion].all; // If "All", use all words
+    } else {
+        currentWordList = wordLists[currentVersion][currentChapter]; // Use the specific chapter
+    }
 
-            currentIndex = 0;
-            loadWord();
-        }
+    currentIndex = 0; // Reset to the first word
+    loadWord(); // Load the first word of the selected chapter
+}
 
        
 
@@ -2257,7 +2270,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 1"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 2"; // Static date
 
 
 
@@ -2265,6 +2278,52 @@ function insertCharacter(character) {
     const answerField = document.getElementById("answer");
     answerField.value += character;  // Append the character to the input field
     answerField.focus();  // Keep the focus on the input field
+}
+
+
+
+
+	    
+function populateVersions() {
+    const versionSelect = document.getElementById("version-select");
+    versionSelect.innerHTML = ''; // Clear any existing options
+
+    // Loop through the wordLists and dynamically add version options
+    Object.keys(wordLists).forEach(version => {
+        const option = document.createElement("option");
+        option.value = version;
+        option.text = version.charAt(0).toUpperCase() + version.slice(1); // Capitalize the first letter
+        versionSelect.appendChild(option);
+    });
+
+    // Trigger the changeVersion function after populating
+    changeVersion();
+}
+
+function populateChapters() {
+    const chapterSelect = document.getElementById("chapter-select");
+    chapterSelect.innerHTML = ''; // Clear any existing options
+
+    // Get the current version and check if chapters exist for that version
+    const currentVersionWordList = wordLists[currentVersion];
+    const chapters = Object.keys(currentVersionWordList);
+
+    // Add "All" option first
+    const allOption = document.createElement("option");
+    allOption.value = "all";
+    allOption.text = "All";
+    chapterSelect.appendChild(allOption);
+
+    // Add chapter options dynamically
+    chapters.forEach(chapter => {
+        const option = document.createElement("option");
+        option.value = chapter;
+        option.text = chapter;
+        chapterSelect.appendChild(option);
+    });
+
+    // Trigger the changeChapter function after populating
+    changeChapter();
 }
 
 
