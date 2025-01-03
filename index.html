@@ -2255,24 +2255,9 @@ function loadTestWord() {
 }
 
 
-function getSeoulTime() {
-    const now = new Date();
-    const seoulOffset = 9 * 60; // Seoul is UTC+9
-    const seoulTime = new Date(now.getTime() + (now.getTimezoneOffset() + seoulOffset) * 60000);
-    const options = {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        timeZone: "Asia/Seoul",
-        timeZoneName: "short",
-    };
-    return seoulTime.toLocaleDateString("en-US", options);
-}
 
-document.getElementById("last-updated").innerText = getSeoulTime();
+
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 1"; // Static date
 
 
 
