@@ -2287,7 +2287,9 @@ testAttempt=1;
     document.querySelector(".container").classList.add("test-mode");
 
 	const randomCheckbox = document.getElementById("random-toggle");
-    randomCheckbox.disabled = true; // Disable the checkbox
+    randomCheckbox.disabled = true; // Disable the random checkbox
+	const swapCheckbox = document.getElementById("swap-toggle");
+	swapCheckbox.disabled=true; // Disable the swap checkbox
 
     loadTestWord();
 }
@@ -2369,7 +2371,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 23 by Wonhyuk Lee"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 24 by Wonhyuk Lee // mistercwon@gmail.com"; // Static date
 
 
 
