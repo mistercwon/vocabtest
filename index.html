@@ -2343,7 +2343,7 @@ function loadTestWord() {
             alert(`You had ${wrongOnFirstTry.size} wrong answers. Starting a new cycle.`);
 
             // Create a new order including incorrect answers
-            let newCycleOrder = [...currentWordList];
+            let newCycleOrder = getCombinedWordList();
             wrongOnFirstTry.forEach(wrongIndex => {
                 if (wrongIndex >= 0 && wrongIndex < testWordOrder.length) {
                     newCycleOrder.push(testWordOrder[wrongIndex]); // Ensure valid indices
@@ -2396,7 +2396,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025-30 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025-31 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
