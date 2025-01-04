@@ -2204,6 +2204,7 @@ function checkAnswer() {
         }
 
         setTimeout(() => {
+		document.querySelector('button[data-action="toggle-answer"]').innerText = "Show Answer";
             resultElement.innerText = ""; // Clear result
         }, 500);
     }
@@ -2395,7 +2396,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025-28 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025-29 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
