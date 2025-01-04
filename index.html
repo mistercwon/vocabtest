@@ -2005,9 +2005,11 @@ const wordLists = {
             }
 
             if (swapWordAndDefinition) {
-                wordDisplay.innerText = `Definition: ${item.definition.join(", ")}`;
+                wordDisplay.innerText = `Definition: ${item.definition.join("; ")}`;
+		    wordDisplay.style.color = "black";
             } else {
                 wordDisplay.innerText = `Word: ${item.word}`;
+		    wordDisplay.style.color = "black";
             }
 
             document.getElementById("answer").value = "";
@@ -2025,7 +2027,7 @@ const wordLists = {
             if (toggleButton.innerText === "Show Answer") {
                 const correctAnswer = swapWordAndDefinition
                     ? currentWord.word
-                    : currentWord.definition.join(", ");
+                    : currentWord.definition.join("; ");
                 resultElement.innerText = `Answer: ${correctAnswer}`;
                 toggleButton.innerText = "Hide Answer";
             } else {
@@ -2345,9 +2347,11 @@ function loadTestWord() {
     const wordDisplay = document.getElementById("word-display");
 
     if (swapWordAndDefinition) {
-        wordDisplay.innerText = `Definition: ${currentTestWord.definition.join(", ")}`;
+        wordDisplay.innerText = `Definition: ${currentTestWord.definition.join("; ")}`;
+	    wordDisplay.style.color = "black";
     } else {
         wordDisplay.innerText = `Word: ${currentTestWord.word}`;
+	    wordDisplay.style.color = "black";
     }
 
     document.getElementById("answer").value = "";
@@ -2362,7 +2366,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 19"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 20"; // Static date
 
 
 
