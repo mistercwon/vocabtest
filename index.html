@@ -2014,6 +2014,7 @@ const wordLists = {
 
             document.getElementById("answer").value = "";
             document.getElementById("result").innerText = "";
+		document.querySelector('button[data-action="toggle-answer"]').innerText = "Show Answer";
 	document.getElementById("word-info").innerText = `Word ${currentIndex + 1}/${currentWordList.length}`; // Update progress
         }
 
@@ -2368,7 +2369,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 22 by Wonhyuk Lee"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 23 by Wonhyuk Lee"; // Static date
 
 
 
