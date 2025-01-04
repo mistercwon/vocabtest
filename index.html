@@ -2309,7 +2309,7 @@ function loadTestWord() {
     if (testIndex >= testWordOrder.length) {
         if (wrongOnFirstTry.size > 0) {
             alert(`You had ${wrongOnFirstTry.size} wrong answers. Starting a new cycle.`);
-           let newCycleOrder = [...currentWordOrder];
+           let newCycleOrder = currentWordOrder;
           
 		 // Add wrong words (words themselves, not the indices) to the cycle again
             wrongOnFirstTry.forEach(wrongIndex => {
