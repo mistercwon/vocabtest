@@ -2029,6 +2029,7 @@ const wordLists = {
                     ? currentWord.word
                     : currentWord.definition.join("; ");
                 resultElement.innerText = `Answer: ${correctAnswer}`;
+		    resultElement.color="black";
                 toggleButton.innerText = "Hide Answer";
             } else {
                 resultElement.innerText = "";
@@ -2366,7 +2367,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 20"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 21"; // Static date
 
 
 
