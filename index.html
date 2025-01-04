@@ -2186,7 +2186,7 @@ function checkAnswer() {
         resultElement.style.color = "green";
 
         if (testMode) {
-		if (wrongOnFirstTry.has(currentWordIndex)) {
+		if (wrongOnFirstTry.length>0 && wrongOnFirstTry.has(currentWordIndex)) {
     wrongOnFirstTry.delete(currentWordIndex); // Remove the index from the Set
 }
             testIndex++;
@@ -2398,7 +2398,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025-34 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025-35 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
