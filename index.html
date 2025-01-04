@@ -140,20 +140,20 @@
         </div>
         <p id="word-display"></p>
         <div class="special-characters" id="special-characters" style="display: none;">
-            <button onclick="insertCharacter('à')">à</button>
-            <button onclick="insertCharacter('â')">â</button>
-            <button onclick="insertCharacter('ç')">ç</button>
-            <button onclick="insertCharacter('é')">é</button>
-            <button onclick="insertCharacter('è')">è</button>
-            <button onclick="insertCharacter('ê')">ê</button>
-            <button onclick="insertCharacter('ë')">ë</button>
-            <button onclick="insertCharacter('î')">î</button>
-            <button onclick="insertCharacter('ï')">ï</button>
-            <button onclick="insertCharacter('ô')">ô</button>
-            <button onclick="insertCharacter('œ')">œ</button>
-            <button onclick="insertCharacter('ù')">ù</button>
-            <button onclick="insertCharacter('û')">û</button>
-            <button onclick="insertCharacter('ü')">ü</button>
+            <button onclick="insertDiacritic('à')">à</button>
+            <button onclick="insertDiacritic('â')">â</button>
+            <button onclick="insertDiacritic('ç')">ç</button>
+            <button onclick="insertDiacritic('é')">é</button>
+            <button onclick="insertDiacritic('è')">è</button>
+            <button onclick="insertDiacritic('ê')">ê</button>
+            <button onclick="insertDiacritic('ë')">ë</button>
+            <button onclick="insertDiacritic('î')">î</button>
+            <button onclick="insertDiacritic('ï')">ï</button>
+            <button onclick="insertDiacritic('ô')">ô</button>
+            <button onclick="insertDiacritic('œ')">œ</button>
+            <button onclick="insertDiacritic('ù')">ù</button>
+            <button onclick="insertDiacritic('û')">û</button>
+            <button onclick="insertDiacritic('ü')">ü</button>
         </div>
         <input type="text" id="answer" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
         <button data-action="toggle-answer" onclick="toggleAnswer()">Show Answer</button>
@@ -2373,7 +2373,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025-26 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025-27 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
@@ -2394,6 +2394,23 @@ function insertCharacter(character) {
     }
 }
 
+function insertDiacritic(diacritic) {
+    const inputElement = document.getElementById("answer");
+    
+    // Get the current cursor position
+    const start = inputElement.selectionStart;
+    const end = inputElement.selectionEnd;
+    const currentValue = inputElement.value;
+
+    // Insert the diacritic at the cursor position
+    inputElement.value = currentValue.slice(0, start) + diacritic + currentValue.slice(end);
+
+    // Move the cursor to after the inserted character
+    inputElement.selectionStart = inputElement.selectionEnd = start + diacritic.length;
+
+    // Refocus on the input element
+    inputElement.focus();
+}
 
 
         function shuffleArray(array) {
