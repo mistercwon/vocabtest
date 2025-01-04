@@ -2309,7 +2309,7 @@ function loadTestWord() {
     if (testIndex >= testWordOrder.length) {
         if (wrongOnFirstTry.size > 0) {
             alert(`You had ${wrongOnFirstTry.size} wrong answers. Starting a new cycle.`);
-           let newCycleOrder = [...testWordOrder];
+           let newCycleOrder = [...currentWordOrder];
           
 		 // Add wrong words (words themselves, not the indices) to the cycle again
             wrongOnFirstTry.forEach(wrongIndex => {
@@ -2351,7 +2351,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 16"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025, 17"; // Static date
 
 
 
