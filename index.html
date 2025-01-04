@@ -162,8 +162,10 @@
         <p id="result"></p>
         <p id="word-info"></p>
         <div class="word-navigation">
+	<button id="first-word-btn" onclick="gotoWord(0)"> << </button>
             <button id="prev-word-btn" onclick="navigateWord(-1)">← Previous</button>
             <button id="next-word-btn" onclick="navigateWord(1)">Next →</button>
+		<button id="last-word-btn" onclick="gotoWord(currentWordList.length-1)"> >> </button>
         </div>
         <div class="updated-info">
             Last Updated: <span id="last-updated"></span>
@@ -2207,7 +2209,25 @@ function checkAnswer() {
     }
 }
 
+function gotoWord(coordinate){
+	if (testMode) {
+        alert("Navigation is not allowed in Test Mode.");
+        return;
+    }
 
+	currentIndex=coordinate;
+
+	// Stop if out of bounds
+    if (currentIndex < 0) {
+	    alert("Enter a valid coordinate!");
+        currentIndex = 0;
+    } else if (currentIndex >= currentWordList.length) {
+	      alert("Enter a valid coordinate!");
+        currentIndex = currentWordList.length-1;
+    }
+
+    loadWord();
+}
 
 function navigateWord(direction) {
     if (testMode) {
@@ -2217,11 +2237,13 @@ function navigateWord(direction) {
 
     currentIndex += direction;
 
-    // Wrap around if out of bounds
+    // Stop if out of bounds
     if (currentIndex < 0) {
-        currentIndex = currentWordList.length - 1;
-    } else if (currentIndex >= currentWordList.length) {
+	    alert("This is the first word of the chapter!");
         currentIndex = 0;
+    } else if (currentIndex >= currentWordList.length) {
+	      alert("This is the last word of the chapter!");
+        currentIndex = currentWordList.length-1;
     }
 
     loadWord();
@@ -2373,7 +2395,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025-27 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 4 Jan 2025-28 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
