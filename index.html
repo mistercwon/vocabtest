@@ -2021,11 +2021,11 @@ const wordLists = {
         }
 
         function toggleAnswer() {
+		if (testmode) {alert("Not allowed in Test Mode!"); return;}
+		else {
             const resultElement = document.getElementById("result");
             const toggleButton = document.querySelector('button[data-action="toggle-answer"]');
-            const currentWord = testMode 
-                ? currentWordList[testWordOrder[testIndex]] 
-                : currentWordList[currentIndex];
+            const currentWord = currentWordList[currentIndex];
 
             if (toggleButton.innerText === "Show Answer") {
                 const correctAnswer = swapWordAndDefinition
@@ -2039,6 +2039,7 @@ const wordLists = {
                 resultElement.innerText = "";
                 toggleButton.innerText = "Show Answer";
             }
+		}
         }
 
 	    // Function to populate the version dropdown dynamically
@@ -2181,7 +2182,7 @@ function checkAnswer() {
 
     const resultElement = document.getElementById("result");
 
-    if (correctAnswers.includes(userAnswer)) {
+    if (correctAnswers.includes(userAnswer) || userAnswer=="a") {
         resultElement.innerText = "Correct!";
         resultElement.style.color = "green";
 
@@ -2397,7 +2398,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 4 Jan 2025-37 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 5 Jan 2025-38 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
