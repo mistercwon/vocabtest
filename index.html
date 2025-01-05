@@ -2024,7 +2024,7 @@ const wordLists = {
 
             const resultElement = document.getElementById("result");
             const toggleButton = document.querySelector('button[data-action="toggle-answer"]');
-            const currentWord = currentWordList[currentIndex];
+            const currentWord = testMode ? currentWordList[testWordOrder[testIndex]] : currentWordList[currentWordIndex];
 
             if (toggleButton.innerText === "Show Answer") {
                 const correctAnswer = swapWordAndDefinition
@@ -2397,7 +2397,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 5 Jan 2025-40 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 5 Jan 2025-41 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
