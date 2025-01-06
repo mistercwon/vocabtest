@@ -1992,6 +1992,11 @@ const wordLists = {
             return Object.values(wordLists[currentVersion]).flat();
         }
 
+
+
+
+	    
+
         function loadWord() {
 
 		// Determine the index to use
@@ -2020,11 +2025,17 @@ const wordLists = {
 	document.getElementById("word-info").innerText = `Word ${currentIndex + 1}/${currentWordList.length}`; // Update progress
         }
 
+
+
+
+
+	    
+
         function toggleAnswer() {
 
             const resultElement = document.getElementById("result");
             const toggleButton = document.querySelector('button[data-action="toggle-answer"]');
-            const currentWord = testMode ? currentWordList[testWordOrder[testIndex]] : currentWordList[currentWordIndex];
+            const currentWord = testMode ? currentWordList[testWordOrder[testIndex]] : currentWordList[currentIndex];
 
             if (toggleButton.innerText === "Show Answer") {
                 const correctAnswer = swapWordAndDefinition
@@ -2397,7 +2408,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 5 Jan 2025-41 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 6 Jan 2025-42 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
