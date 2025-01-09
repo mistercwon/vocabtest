@@ -130,9 +130,6 @@
             <label>
                 <input type="checkbox" id="random-toggle" onchange="toggleRandom()"> Random
             </label>
-            <label>
-                <input type="checkbox" id="swap-toggle" onchange="toggleSwap()"> Swap Word/Definition
-            </label>
 		<label>
     <input type="checkbox" id="diacritics-toggle" onchange="toggleDiacritics()"> Hide Diacritics
 </label>
@@ -155,7 +152,12 @@
             <button onclick="insertDiacritic('û')">û</button>
             <button onclick="insertDiacritic('ü')">ü</button>
         </div>
-        <input type="text" id="answer" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+        <input type="text" size="40" id="answer1" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+	<input type="text" size="40" id="answer2" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+	<input type="text" size="40" id="answer3" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+	<input type="text" size="40" id="answer4" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+	<input type="text" size="40" id="answer5" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+	<input type="text" size="40" id="answer6" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
         <button data-action="toggle-answer" onclick="toggleAnswer()">Show Answer</button>
         <button onclick="checkAnswer()">Submit</button>
         <button id="test-mode-btn" onclick="startTestMode()">Test Mode</button>
@@ -186,7 +188,6 @@ const wordLists = {
         let currentWordList = [];
         let currentIndex = 0;
         let isRandom = false;
-        let swapWordAndDefinition = false;
         let testMode = false;
         let testWordOrder = [];
         let testIndex = 0;
@@ -222,15 +223,16 @@ const wordLists = {
                 return;
             }
 
-            if (swapWordAndDefinition) {
-                wordDisplay.innerText = `Definition: ${item.definition.join("; ")}`;
-		    
-            } else {
+            
                 wordDisplay.innerText = `Word: ${item.word}`;
 		    
-            }
 
-            document.getElementById("answer").value = "";
+            document.getElementById("answer1").value = "";
+		document.getElementById("answer2").value = "";
+		document.getElementById("answer3").value = "";
+		document.getElementById("answer4").value = "";
+		document.getElementById("answer5").value = "";
+		document.getElementById("answer6").value = "";
             document.getElementById("result").innerText = "";
 		document.querySelector('button[data-action="toggle-answer"]').innerText = "Show Answer";
 	document.getElementById("word-info").innerText = `Word ${currentIndex + 1}/${currentWordList.length}`; // Update progress
@@ -249,9 +251,7 @@ const wordLists = {
             const currentWord = testMode ? currentWordList[testWordOrder[testIndex]] : currentWordList[currentIndex];
 
             if (toggleButton.innerText === "Show Answer") {
-                const correctAnswer = swapWordAndDefinition
-                    ? currentWord.word
-                    : currentWord.definition.join("; ");
+                const correctAnswer = currentWord.definition.join("; ");
 		    
                 resultElement.innerText = `Answer: ${correctAnswer}`;
 		    resultElement.style.color="black";
@@ -394,16 +394,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function checkAnswer() {
-    const userAnswer = document.getElementById("answer").value.trim().toLowerCase();
+    const userAnswer1 = document.getElementById("answer1").value.trim().toLowerCase();
+	const userAnswer2 = document.getElementById("answer2").value.trim().toLowerCase();
+	const userAnswer3 = document.getElementById("answer3").value.trim().toLowerCase();
+	const userAnswer4 = document.getElementById("answer4").value.trim().toLowerCase();
+	const userAnswer5 = document.getElementById("answer5").value.trim().toLowerCase();
+	const userAnswer6 = document.getElementById("answer6").value.trim().toLowerCase();
     const currentWordIndex = testMode ? testIndex : currentIndex;
     const currentWord = testMode ? currentWordList[testWordOrder[testIndex]] : currentWordList[currentWordIndex];
-    const correctAnswers = swapWordAndDefinition
-        ? [currentWord.word.toLowerCase()]
-        : currentWord.definition.map(def => def.toLowerCase());
+    const correctAnswers = currentWord.definition.map(def => def.toLowerCase());
+	const correctAnswer1=correctAnswers[0];
+	const correctAnswer2=correctAnswers[1];
+	const correctAnswer3=correctAnswers[2];
+	const correctAnswer4=correctAnswers[3];
+	const correctAnswer5=correctAnswers[4];
+	const correctAnswer6=correctAnswers[5];
 
     const resultElement = document.getElementById("result");
 
-    if (correctAnswers.includes(userAnswer) || userAnswer=="a") {
+    if ( (userAnswer1==correctAnswer1 && userAnswer2==correctAnswer2 && userAnswer3==correctAnswer3 && userAnswer4==correctAnswer4 && userAnswer5==correctAnswer5 && userAnswer6==correctAnswer6) || userAnswer=="a") {
         resultElement.innerText = "Correct!";
         resultElement.style.color = "green";
 
@@ -479,10 +488,6 @@ function navigateWord(direction) {
             loadWord();
         }
 
-        function toggleSwap() {
-            swapWordAndDefinition = document.getElementById("swap-toggle").checked;
-            loadWord();
-        }
 
         function handleKeyPress(event) {
             if (event.key === "Enter") {
@@ -533,8 +538,6 @@ testAttempt=1;
 
 	const randomCheckbox = document.getElementById("random-toggle");
     randomCheckbox.disabled = true; // Disable the random checkbox
-	const swapCheckbox = document.getElementById("swap-toggle");
-	swapCheckbox.disabled=true; // Disable the swap checkbox
 
     loadTestWord();
 }
@@ -550,8 +553,6 @@ testAttempt=1;
 
 	const randomCheckbox = document.getElementById("random-toggle");
     randomCheckbox.disabled = false; // Re-enable the checkbox
-			const swapCheckbox = document.getElementById("swap-toggle");
-	swapCheckbox.disabled=false; // Re-enable the swap checkbox
 
             loadWord();
         }
@@ -599,15 +600,17 @@ function loadTestWord() {
     const currentTestWord = currentWordList[testWordOrder[testIndex]];
     const wordDisplay = document.getElementById("word-display");
 
-    if (swapWordAndDefinition) {
-        wordDisplay.innerText = `Definition: ${currentTestWord.definition.join("; ")}`;
-	    
-    } else {
+    
         wordDisplay.innerText = `Word: ${currentTestWord.word}`;
 	   
-    }
+    
 
-    document.getElementById("answer").value = "";
+    document.getElementById("answer1").value = "";
+	document.getElementById("answer2").value = "";
+	document.getElementById("answer3").value = "";
+	document.getElementById("answer4").value = "";
+	document.getElementById("answer5").value = "";
+	document.getElementById("answer6").value = "";
     document.getElementById("result").innerText = "";
 	document.querySelector('button[data-action="toggle-answer"]').innerText = "Show Answer";
     document.getElementById("word-info").innerText = `Test Attempt #${testAttempt} | Problem ${testIndex + 1}/${testWordOrder.length}`;
@@ -619,12 +622,12 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-3 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-4 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
 function insertCharacter(character) {
-    const answerField = document.getElementById("answer");
+    const answerField = document.activeElement;
     answerField.value += character;  // Append the character to the input field
     answerField.focus();  // Keep the focus on the input field
 }
@@ -641,7 +644,7 @@ function insertCharacter(character) {
 }
 
 function insertDiacritic(diacritic) {
-    const inputElement = document.getElementById("answer");
+    const inputElement = document.activeElement;
     
     // Get the current cursor position
     const start = inputElement.selectionStart;
