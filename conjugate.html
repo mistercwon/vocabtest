@@ -27,7 +27,7 @@
             font-size: 0.9em;
         }
         input[type="text"] {
-            width: calc(100% - 100px);
+            width: calc(100% - 60px);
             padding: 12px;
             margin: 10px 0;
             border: 1px solid #ccc;
@@ -152,12 +152,12 @@
             <button onclick="insertDiacritic('û')">û</button>
             <button onclick="insertDiacritic('ü')">ü</button>
         </div>
-        <label for="je/j'" style="display: inline-block; width: 40px;">Je:</label> <input type="text" id="answer1" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
-	<input type="text" size="40" id="answer2" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
-	<input type="text" size="40" id="answer3" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
-	<input type="text" size="40" id="answer4" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
-	<input type="text" size="40" id="answer5" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
-	<input type="text" size="40" id="answer6" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+        <label for="je" style="display: inline-block; width: 40px;">Je/J':</label> 	<input type="text" id="answer1" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+	<label for="tu" style="display: inline-block; width: 40px;">Tu</label>		<input type="text" id="answer2" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+	<label for="il" style="display: inline-block; width: 40px;">Il/Elle/On:</label>	<input type="text" id="answer3" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+	<label for="nous" style="display: inline-block; width: 40px;">Nous:</label>	<input type="text" id="answer4" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+	<label for="vous" style="display: inline-block; width: 40px;">Vous:</label>	<input type="text" id="answer5" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+	<label for="ils" style="display: inline-block; width: 40px;">Ils/Elles:</label>	<input type="text" id="answer6" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
         <button data-action="toggle-answer" onclick="toggleAnswer()">Show Answer</button>
         <button onclick="checkAnswer()">Submit</button>
         <button id="test-mode-btn" onclick="startTestMode()">Test Mode</button>
@@ -627,7 +627,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-10 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-11 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
