@@ -155,7 +155,27 @@
             <button onclick="insertDiacritic('û')">û</button>
             <button onclick="insertDiacritic('ü')">ü</button>
         </div>
-        <input type="text" id="answer" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+
+	    <script>
+    const version = currentVersion;
+
+    if (version === 'conjugaison') {
+        document.getElementById('container').innerHTML = `
+            <input type="text" id="answer1" placeholder="je/j'" onkeydown="handleKeyPress(event)">
+            <input type="text" id="answer2" placeholder="tu" onkeydown="handleKeyPress(event)">
+            <input type="text" id="answer3" placeholder="il/elle/on" onkeydown="handleKeyPress(event)">
+            <input type="text" id="answer4" placeholder="nous" onkeydown="handleKeyPress(event)">
+            <input type="text" id="answer5" placeholder="vous" onkeydown="handleKeyPress(event)">
+            <input type="text" id="answer6" placeholder="ils/elles" onkeydown="handleKeyPress(event)">
+        `;
+    } else {
+        document.getElementById('container').innerHTML = `
+            <input type="text" id="answer" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+        `;
+    }
+</script>
+	    
+        
         <button data-action="toggle-answer" onclick="toggleAnswer()">Show Answer</button>
         <button onclick="checkAnswer()">Submit</button>
         <button id="test-mode-btn" onclick="startTestMode()">Test Mode</button>
@@ -2411,7 +2431,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-45 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-46 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
