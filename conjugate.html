@@ -175,7 +175,7 @@
     <script>
 const wordLists = {
     
-	french: { INDICATIF présent: [
+	french: { 1: [
 		{word: "manger", definition: ["je mange"]}
 	]}
     
@@ -363,7 +363,7 @@ function updateSpecialCharacters() {
     const specialCharsContainer = document.getElementById("special-characters");
 
     // Show special characters only if French version is selected
-    if (currentVersion === "french" || currentVersion === "conjugaison") {
+    if (currentVersion === "french") {
         specialCharsContainer.style.display = "flex"; // Show
     } else {
         specialCharsContainer.style.display = "none"; // Hide
@@ -619,7 +619,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-2 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-3 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
