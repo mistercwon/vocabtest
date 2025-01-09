@@ -418,7 +418,32 @@ const wordLists = {
 
 
 
-	    
+	    function changeLabel() {
+    const tense = getCurrentChapter();  // Function to get current tense, modify according to your implementation.
+    const label1 = document.querySelector("label[for='je']"); // Get the label for 'je' (assuming this is the label you're talking about)
+		    const label2 = document.querySelector("label[for='tu']");
+		    const label3 = document.querySelector("label[for='il']");
+		    const label4 = document.querySelector("label[for='nous']");
+		    const label5 = document.querySelector("label[for='vous']");
+		    const label6 = document.querySelector("label[for='ils']");
+
+    if (tense === 'PARTICIPLE') {
+        label1.innerText = "Present: ";  // Change to "Present" when in PARTICIPLE tense
+	    label2.innerText = "Passé: ";
+	    label3.innerText = "";
+	    label4.innerText = "";
+	    label5.innerText = "";
+	    label6.innerText = "";
+    } else {
+        label1.innerText = "Je/J':"; // Default label
+	    label2.innerText = "Tu: ";
+	    label3.innerText = "Il/Elle/On";
+	    label4.innerText = "Nous";
+	    label5.innerText = "Vous";
+	    label6.innerText = "Ils/Elles";
+    }
+}
+
 
         function loadWord() {
 
@@ -603,6 +628,7 @@ function updateSpecialCharacters() {
 // Initialize the dropdowns and set default values when the page loads
 document.addEventListener("DOMContentLoaded", () => {
     populateVersionDropdown();  // Populate the version dropdown
+	changeLabel();
 });
 
 
@@ -838,7 +864,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-19 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-20 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
