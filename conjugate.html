@@ -627,7 +627,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-15 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-16 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
@@ -649,22 +649,29 @@ function insertCharacter(character) {
 }
 
 function insertDiacritic(diacritic) {
-    const inputElement = document.getElementById("answer1");
-    
-    // Get the current cursor position
-    const start = inputElement.selectionStart;
-    const end = inputElement.selectionEnd;
-    const currentValue = inputElement.value;
+    // Get the currently focused input element
+    const inputElement = document.activeElement;
 
-    // Insert the diacritic at the cursor position
-    inputElement.value = currentValue.slice(0, start) + diacritic + currentValue.slice(end);
+    // Ensure the active element is a valid input or textarea
+    if (inputElement.tagName === "INPUT" || inputElement.tagName === "TEXTAREA") {
+        // Get the current cursor position
+        const start = inputElement.selectionStart;
+        const end = inputElement.selectionEnd;
+        const currentValue = inputElement.value;
 
-    // Move the cursor to after the inserted character
-    inputElement.selectionStart = inputElement.selectionEnd = start + diacritic.length;
+        // Insert the diacritic at the cursor position
+        inputElement.value = currentValue.slice(0, start) + diacritic + currentValue.slice(end);
 
-    // Refocus on the input element
-    inputElement.focus();
+        // Move the cursor to after the inserted character
+        inputElement.selectionStart = inputElement.selectionEnd = start + diacritic.length;
+
+        // Refocus on the input element (optional, ensures focus remains)
+        inputElement.focus();
+    } else {
+        console.warn("No valid input field is currently focused.");
+    }
 }
+
 
 
         function shuffleArray(array) {
