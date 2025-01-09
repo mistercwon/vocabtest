@@ -632,7 +632,7 @@ document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-15 by W
 
 
 function insertCharacter(character) {
-    const answerField = document.getElementByID("answer1");
+    const answerField = document.getElementById("answer1");
     answerField.value += character;  // Append the character to the input field
     answerField.focus();  // Keep the focus on the input field
 }
@@ -649,7 +649,7 @@ function insertCharacter(character) {
 }
 
 function insertDiacritic(diacritic) {
-    const inputElement = document.getElementByID("answer1");
+    const inputElement = document.getElementById("answer1");
     
     // Get the current cursor position
     const start = inputElement.selectionStart;
