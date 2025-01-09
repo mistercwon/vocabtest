@@ -176,12 +176,202 @@
 
     <script>
 const wordLists = {
-    
-	french: { INDICATIF_Présent: [
-		{word: "parler", definition: ["parle","parles","parle","parlons","parlez","parlent"]}
-	]}
-    
+    french: {
+        INDICATIF_Présent: [
+            { word: "être", definition: ["suis", "es", "est", "sommes", "êtes", "sont"] },
+            { word: "avoir", definition: ["ai", "as", "a", "avons", "avez", "ont"] },
+            { word: "aller", definition: ["vais", "vas", "va", "allons", "allez", "vont"] },
+            { word: "venir", definition: ["viens", "viens", "vient", "venons", "venez", "viennent"] },
+            { word: "parler", definition: ["parle", "parles", "parle", "parlons", "parlez", "parlent"] },
+            { word: "faire", definition: ["fais", "fais", "fait", "faisons", "faites", "font"] },
+            { word: "pouvoir", definition: ["peux", "peux", "peut", "pouvons", "pouvez", "peuvent"] },
+            { word: "partir", definition: ["pars", "pars", "part", "partons", "partez", "partent"] },
+            { word: "vouloir", definition: ["veux", "veux", "veut", "voulons", "voulez", "veulent"] },
+            { word: "prendre", definition: ["prends", "prends", "prend", "prenons", "prenez", "prennent"] },
+            { word: "voir", definition: ["vois", "vois", "voit", "voyons", "voyez", "voient"] },
+            { word: "devoir", definition: ["dois", "dois", "doit", "devons", "devez", "doivent"] },
+            { word: "manger", definition: ["mange", "manges", "mange", "mangeons", "mangez", "mangent"] },
+            { word: "savoir", definition: ["sais", "sais", "sait", "savons", "savez", "savent"] },
+            { word: "dire", definition: ["dis", "dis", "dit", "disons", "dites", "disent"] },
+            { word: "mettre", definition: ["mets", "mets", "met", "mettons", "mettez", "mettent"] },
+            { word: "finir", definition: ["finis", "finis", "finit", "finissons", "finissez", "finissent"] },
+            { word: "lire", definition: ["lis", "lis", "lit", "lisons", "lisez", "lisent"] },
+            { word: "sortir", definition: ["sors", "sors", "sort", "sortons", "sortez", "sortent"] },
+            { word: "boire", definition: ["bois", "bois", "boit", "buvons", "buvez", "boivent"] },
+            { word: "recevoir", definition: ["reçois", "reçois", "reçoit", "recevons", "recevez", "reçoivent"] },
+            { word: "dormir", definition: ["dors", "dors", "dort", "dormons", "dormez", "dorment"] },
+            { word: "connaître", definition: ["connais", "connais", "connaît", "connaissons", "connaissez", "connaissent"] },
+            { word: "attendre", definition: ["attends", "attends", "attend", "attendons", "attendez", "attendent"] },
+            { word: "écrire", definition: ["écris", "écris", "écrit", "écrivons", "écrivez", "écrivent"] }
+        ],
+	    INDICATIF_Imparfait: [
+            { word: "être", definition: ["étais", "étais", "était", "étions", "étiez", "étaient"] },
+            { word: "avoir", definition: ["avais", "avais", "avait", "avions", "aviez", "avaient"] },
+            { word: "aller", definition: ["allais", "allais", "allait", "allions", "alliez", "allaient"] },
+            { word: "venir", definition: ["venais", "venais", "venait", "venions", "veniez", "venaient"] },
+            { word: "parler", definition: ["parlais", "parlais", "parlait", "parlions", "parliez", "parlaient"] },
+            { word: "faire", definition: ["faisais", "faisais", "faisait", "faisions", "faisiez", "faisaient"] },
+            { word: "pouvoir", definition: ["pouvais", "pouvais", "pouvait", "pouvions", "pouviez", "pouvaient"] },
+            { word: "partir", definition: ["partais", "partais", "partait", "partions", "partiez", "partaient"] },
+            { word: "vouloir", definition: ["voulais", "voulais", "voulait", "voulions", "vouliez", "voulaient"] },
+            { word: "prendre", definition: ["prenais", "prenais", "prenait", "prenions", "preniez", "prenaient"] },
+            { word: "voir", definition: ["voyais", "voyais", "voyait", "voyions", "voyiez", "voyaient"] },
+            { word: "devoir", definition: ["devais", "devais", "devait", "devions", "deviez", "devaient"] },
+            { word: "manger", definition: ["mangeais", "mangeais", "mangeait", "mangions", "mangiez", "mangeaient"] },
+            { word: "savoir", definition: ["savais", "savais", "savait", "savions", "saviez", "savaient"] },
+            { word: "dire", definition: ["disais", "disais", "disait", "disions", "disiez", "disaient"] },
+            { word: "mettre", definition: ["mettais", "mettais", "mettait", "mettions", "mettiez", "mettaient"] },
+            { word: "finir", definition: ["finissais", "finissais", "finissait", "finissions", "finissiez", "finissaient"] },
+            { word: "lire", definition: ["lisais", "lisais", "lisait", "lisions", "lisiez", "lisaient"] },
+            { word: "sortir", definition: ["sortais", "sortais", "sortait", "sortions", "sortiez", "sortaient"] },
+            { word: "boire", definition: ["buvais", "buvais", "buvait", "buvions", "buviez", "buvaient"] },
+            { word: "recevoir", definition: ["recevais", "recevais", "recevait", "recevions", "receviez", "recevaient"] },
+            { word: "dormir", definition: ["dormais", "dormais", "dormait", "dormions", "dormiez", "dormaient"] },
+            { word: "connaître", definition: ["connaissais", "connaissais", "connaissait", "connaissions", "connaissiez", "connaissaient"] },
+            { word: "attendre", definition: ["attendais", "attendais", "attendait", "attendions", "attendiez", "attendaient"] },
+            { word: "écrire", definition: ["écrivais", "écrivais", "écrivait", "écrivions", "écriviez", "écrivaient"] }
+        ],
+	    INDICATIF_Passé_Composé: [
+            { word: "être", definition: ["ai été", "as été", "a été", "avons été", "avez été", "ont été"] },
+            { word: "avoir", definition: ["ai eu", "as eu", "a eu", "avons eu", "avez eu", "ont eu"] },
+            { word: "aller", definition: ["suis allé(e)", "es allé(e)", "est allé(e)", "sommes allé(e)s", "êtes allé(e)(s)", "sont allé(e)s"] },
+            { word: "venir", definition: ["suis venu(e)", "es venu(e)", "est venu(e)", "sommes venu(e)s", "êtes venu(e)(s)", "sont venu(e)s"] },
+            { word: "parler", definition: ["ai parlé", "as parlé", "a parlé", "avons parlé", "avez parlé", "ont parlé"] },
+            { word: "faire", definition: ["ai fait", "as fait", "a fait", "avons fait", "avez fait", "ont fait"] },
+            { word: "pouvoir", definition: ["ai pu", "as pu", "a pu", "avons pu", "avez pu", "ont pu"] },
+            { word: "partir", definition: ["suis parti(e)", "es parti(e)", "est parti(e)", "sommes parti(e)s", "êtes parti(e)(s)", "sont parti(e)s"] },
+            { word: "vouloir", definition: ["ai voulu", "as voulu", "a voulu", "avons voulu", "avez voulu", "ont voulu"] },
+            { word: "prendre", definition: ["ai pris", "as pris", "a pris", "avons pris", "avez pris", "ont pris"] },
+            { word: "voir", definition: ["ai vu", "as vu", "a vu", "avons vu", "avez vu", "ont vu"] },
+            { word: "devoir", definition: ["ai dû", "as dû", "a dû", "avons dû", "avez dû", "ont dû"] },
+            { word: "manger", definition: ["ai mangé", "as mangé", "a mangé", "avons mangé", "avez mangé", "ont mangé"] },
+            { word: "savoir", definition: ["ai su", "as su", "a su", "avons su", "avez su", "ont su"] },
+            { word: "dire", definition: ["ai dit", "as dit", "a dit", "avons dit", "avez dit", "ont dit"] },
+            { word: "mettre", definition: ["ai mis", "as mis", "a mis", "avons mis", "avez mis", "ont mis"] },
+            { word: "finir", definition: ["ai fini", "as fini", "a fini", "avons fini", "avez fini", "ont fini"] },
+            { word: "lire", definition: ["ai lu", "as lu", "a lu", "avons lu", "avez lu", "ont lu"] },
+            { word: "sortir", definition: ["suis sorti(e)", "es sorti(e)", "est sorti(e)", "sommes sorti(e)s", "êtes sorti(e)(s)", "sont sorti(e)s"] },
+            { word: "boire", definition: ["ai bu", "as bu", "a bu", "avons bu", "avez bu", "ont bu"] },
+            { word: "recevoir", definition: ["ai reçu", "as reçu", "a reçu", "avons reçu", "avez reçu", "ont reçu"] },
+            { word: "dormir", definition: ["ai dormi", "as dormi", "a dormi", "avons dormi", "avez dormi", "ont dormi"] },
+            { word: "connaître", definition: ["ai connu", "as connu", "a connu", "avons connu", "avez connu", "ont connu"] },
+            { word: "attendre", definition: ["ai attendu", "as attendu", "a attendu", "avons attendu", "avez attendu", "ont attendu"] },
+            { word: "écrire", definition: ["ai écrit", "as écrit", "a écrit", "avons écrit", "avez écrit", "ont écrit"] }
+        ],
+
+	    INDICATIF_Passé_Simple: [
+            { word: "être", definition: ["fus", "fus", "fut", "fûmes", "fûtes", "furent"] },
+            { word: "avoir", definition: ["eus", "eus", "eut", "eûmes", "eûtes", "eurent"] },
+            { word: "aller", definition: ["allai", "allas", "alla", "allâmes", "allâtes", "allèrent"] },
+            { word: "venir", definition: ["vins", "vins", "vint", "vînmes", "vîntes", "vinrent"] },
+            { word: "parler", definition: ["parlai", "parlas", "parla", "parlâmes", "parlâtes", "parlèrent"] },
+            { word: "faire", definition: ["fis", "fis", "fit", "fîmes", "fîtes", "firent"] },
+            { word: "pouvoir", definition: ["pus", "pus", "put", "pûmes", "pûtes", "purent"] },
+            { word: "partir", definition: ["partis", "partis", "partit", "partîmes", "partîtes", "partirent"] },
+            { word: "vouloir", definition: ["voulus", "voulus", "voulut", "voulûmes", "voulûtes", "voulurent"] },
+            { word: "prendre", definition: ["pris", "pris", "prit", "prîmes", "prîtes", "prirent"] },
+            { word: "voir", definition: ["vis", "vis", "vit", "vîmes", "vîtes", "virent"] },
+            { word: "devoir", definition: ["dus", "dus", "dut", "dûmes", "dûtes", "durent"] },
+            { word: "manger", definition: ["mangeai", "mangeas", "mangea", "mangeâmes", "mangeâtes", "mangèrent"] },
+            { word: "savoir", definition: ["sus", "sus", "sut", "sûmes", "sûtes", "surent"] },
+            { word: "dire", definition: ["dis", "dis", "dit", "dîmes", "dîtes", "dirent"] },
+            { word: "mettre", definition: ["mis", "mis", "mit", "mîmes", "mîtes", "mirent"] },
+            { word: "finir", definition: ["finis", "finis", "finit", "finîmes", "finîtes", "finirent"] },
+            { word: "lire", definition: ["lus", "lus", "lut", "lûmes", "lûtes", "lurent"] },
+            { word: "sortir", definition: ["sortis", "sortis", "sortit", "sortîmes", "sortîtes", "sortirent"] },
+            { word: "boire", definition: ["bus", "bus", "but", "bûmes", "bûtes", "burent"] },
+            { word: "recevoir", definition: ["reçus", "reçus", "reçut", "reçûmes", "reçûtes", "reçurent"] },
+            { word: "dormir", definition: ["dormis", "dormis", "dormit", "dormîmes", "dormîtes", "dormirent"] },
+            { word: "connaître", definition: ["connus", "connus", "connut", "connûmes", "connûtes", "connurent"] },
+            { word: "attendre", definition: ["attendis", "attendis", "attendit", "attendîmes", "attendîtes", "attendirent"] },
+            { word: "écrire", definition: ["écrivis", "écrivis", "écrivit", "écrivîmes", "écrivîtes", "écrivirent"] }
+        ],
+	    INDICATIF_Futur_Simple: [
+            { word: "être", definition: ["serai", "seras", "sera", "serons", "serez", "seront"] },
+            { word: "avoir", definition: ["aurai", "auras", "aura", "aurons", "aurez", "auront"] },
+            { word: "aller", definition: ["irai", "iras", "ira", "irons", "irez", "iront"] },
+            { word: "venir", definition: ["viendrai", "viendras", "viendra", "viendrons", "viendrez", "viendront"] },
+            { word: "parler", definition: ["parlerai", "parleras", "parlera", "parlerons", "parlerez", "parleront"] },
+            { word: "faire", definition: ["ferai", "feras", "fera", "ferons", "ferez", "feront"] },
+            { word: "pouvoir", definition: ["pourrai", "pourras", "pourra", "pourrons", "pourrez", "pourront"] },
+            { word: "partir", definition: ["partirai", "partiras", "partira", "partirons", "partirez", "partiront"] },
+            { word: "vouloir", definition: ["voudrai", "voudras", "voudra", "voudrons", "voudrez", "voudront"] },
+            { word: "prendre", definition: ["prendrai", "prendras", "prendra", "prendrons", "prendrez", "prendront"] },
+            { word: "voir", definition: ["verrai", "verras", "verra", "verrons", "verrez", "verront"] },
+            { word: "devoir", definition: ["devrai", "devras", "devra", "devrons", "devrez", "devront"] },
+            { word: "manger", definition: ["mangerai", "mangeras", "mangera", "mangerons", "mangerez", "mangeront"] },
+            { word: "savoir", definition: ["saurai", "sauras", "saura", "saurons", "saurez", "sauront"] },
+            { word: "dire", definition: ["dirai", "diras", "dira", "dirons", "direz", "diront"] },
+            { word: "mettre", definition: ["mettrai", "mettras", "mettra", "mettrons", "mettrez", "mettront"] },
+            { word: "finir", definition: ["finirai", "finiras", "finira", "finirons", "finirez", "finiront"] },
+            { word: "lire", definition: ["lirai", "liras", "lira", "lirons", "lirez", "liront"] },
+            { word: "sortir", definition: ["sortirai", "sortiras", "sortira", "sortirons", "sortirez", "sortiront"] },
+            { word: "boire", definition: ["boirai", "boiras", "boira", "boirons", "boirez", "boiront"] },
+            { word: "recevoir", definition: ["recevrai", "recevras", "recevra", "recevrons", "recevrez", "recevront"] },
+            { word: "dormir", definition: ["dormirai", "dormiras", "dormira", "dormirons", "dormirez", "dormiront"] },
+            { word: "connaître", definition: ["connaîtrai", "connaîtras", "connaîtra", "connaîtrons", "connaîtrez", "connaîtront"] },
+            { word: "attendre", definition: ["attendrai", "attendras", "attendra", "attendrons", "attendrez", "attendront"] },
+            { word: "écrire", definition: ["écrirai", "écriras", "écrira", "écrirons", "écrirez", "écriront"] }
+        ],
+	    SUBJONCTIF_Présent: [
+            { word: "être", definition: ["sois", "sois", "soit", "soyons", "soyez", "soient"] },
+            { word: "avoir", definition: ["aie", "aies", "ait", "ayons", "ayez", "aient"] },
+            { word: "aller", definition: ["aille", "ailles", "aille", "allions", "alliez", "aillent"] },
+            { word: "venir", definition: ["vienne", "viennes", "vienne", "venions", "veniez", "viennent"] },
+            { word: "parler", definition: ["parle", "parles", "parle", "parlions", "parliez", "parlent"] },
+            { word: "faire", definition: ["fasse", "fasses", "fasse", "fassions", "fassiez", "fassent"] },
+            { word: "pouvoir", definition: ["puisse", "puisses", "puisse", "puissions", "puissiez", "puissent"] },
+            { word: "partir", definition: ["parte", "partes", "parte", "partions", "partiez", "partent"] },
+            { word: "vouloir", definition: ["veuille", "veuilles", "veuille", "voulions", "vouliez", "veuillent"] },
+            { word: "prendre", definition: ["prenne", "prennes", "prenne", "prenions", "preniez", "prennent"] },
+            { word: "voir", definition: ["voie", "voies", "voie", "voyions", "voyiez", "voient"] },
+            { word: "devoir", definition: ["doive", "doives", "doive", "devions", "deviez", "doivent"] },
+            { word: "manger", definition: ["mange", "manges", "mange", "mangions", "mangiez", "mangent"] },
+            { word: "savoir", definition: ["sache", "saches", "sache", "sachions", "sachiez", "sachent"] },
+            { word: "dire", definition: ["dise", "dises", "dise", "disions", "disiez", "disent"] },
+            { word: "mettre", definition: ["mette", "mettes", "mette", "mettions", "mettiez", "mettent"] },
+            { word: "finir", definition: ["finisse", "finisses", "finisse", "finissions", "finissiez", "finissent"] },
+            { word: "lire", definition: ["lise", "lises", "lise", "lisions", "lisiez", "lisent"] },
+            { word: "sortir", definition: ["sorte", "sortes", "sorte", "sortions", "sortiez", "sortent"] },
+            { word: "boire", definition: ["boive", "boives", "boive", "buvions", "buviez", "boivent"] },
+            { word: "recevoir", definition: ["reçoive", "reçoives", "reçoive", "recevions", "receviez", "reçoivent"] },
+            { word: "dormir", definition: ["dorme", "dormes", "dorme", "dormions", "dormiez", "dorment"] },
+            { word: "connaître", definition: ["connaisse", "connaisses", "connaisse", "connaissions", "connaissiez", "connaissent"] },
+            { word: "attendre", definition: ["attende", "attendes", "attende", "attendions", "attendiez", "attendent"] },
+            { word: "écrire", definition: ["écrive", "écrives", "écrive", "écrivions", "écriviez", "écrivent"] }
+        ],
+
+	            PARTICIPLE: [
+            { word: "être", definition: ["étant", "été", "", "", "", ""] },
+            { word: "avoir", definition: ["ayant", "eu", "", "", "", ""] },
+            { word: "aller", definition: ["allant", "allé", "", "", "", ""] },
+            { word: "venir", definition: ["venant", "venu", "", "", "", ""] },
+            { word: "parler", definition: ["parlant", "parlé", "", "", "", ""] },
+            { word: "faire", definition: ["faisant", "fait", "", "", "", ""] },
+            { word: "pouvoir", definition: ["pouvant", "pu", "", "", "", ""] },
+            { word: "partir", definition: ["partant", "parti", "", "", "", ""] },
+            { word: "vouloir", definition: ["voulant", "voulu", "", "", "", ""] },
+            { word: "prendre", definition: ["prenant", "pris", "", "", "", ""] },
+            { word: "voir", definition: ["voyant", "vu", "", "", "", ""] },
+            { word: "devoir", definition: ["devant", "dû", "", "", "", ""] },
+            { word: "manger", definition: ["mangeant", "mangé", "", "", "", ""] },
+            { word: "savoir", definition: ["sachant", "su", "", "", "", ""] },
+            { word: "dire", definition: ["disant", "dit", "", "", "", ""] },
+            { word: "mettre", definition: ["mettant", "mis", "", "", "", ""] },
+            { word: "finir", definition: ["finissant", "fini", "", "", "", ""] },
+            { word: "lire", definition: ["lisant", "lu", "", "", "", ""] },
+            { word: "sortir", definition: ["sortant", "sorti", "", "", "", ""] },
+            { word: "boire", definition: ["buvant", "bu", "", "", "", ""] },
+            { word: "recevoir", definition: ["recevant", "reçu", "", "", "", ""] },
+            { word: "dormir", definition: ["dormant", "dormi", "", "", "", ""] },
+            { word: "connaître", definition: ["connaissant", "connu", "", "", "", ""] },
+            { word: "attendre", definition: ["attendant", "attendu", "", "", "", ""] },
+            { word: "écrire", definition: ["écrivant", "écrit", "", "", "", ""] }
+        ]
+
+    }
 };
+
 
         let currentVersion = "french";
         let currentChapter = "all";
@@ -648,7 +838,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-18 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-19 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
