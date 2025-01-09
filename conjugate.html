@@ -623,8 +623,9 @@ function updateSpecialCharacters() {
 
             currentIndex = 0;
             loadWord();
+	   changeLabel();
         }
-       changeLabel();
+
 // Initialize the dropdowns and set default values when the page loads
 document.addEventListener("DOMContentLoaded", () => {
     populateVersionDropdown();  // Populate the version dropdown
@@ -864,7 +865,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-21 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-22 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
