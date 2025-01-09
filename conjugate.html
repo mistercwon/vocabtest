@@ -459,7 +459,7 @@ const wordLists = {
                 return;
             }
 
-            
+            changeLabel();
                 wordDisplay.innerText = `Infinitive: ${item.word}`;
 		    
 
@@ -623,7 +623,7 @@ function updateSpecialCharacters() {
 
             currentIndex = 0;
             loadWord();
-	   changeLabel();
+	
         }
 
 // Initialize the dropdowns and set default values when the page loads
@@ -841,7 +841,7 @@ function loadTestWord() {
     const currentTestWord = currentWordList[testWordOrder[testIndex]];
     const wordDisplay = document.getElementById("word-display");
 
-    
+    changeLabel();
         wordDisplay.innerText = `Word: ${currentTestWord.word}`;
 	   
     
@@ -865,7 +865,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-22 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-23 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
