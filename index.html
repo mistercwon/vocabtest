@@ -1022,7 +1022,7 @@ const wordLists = {
             { word: "zealous", definition: ["fervent", "ardent", "impassioned"] }
         ]
     },
-	fconj: { 1: [
+	conjugaison: { 1: [
 		{word: "manger", definition: ["je mange"]}
 	]},
     french: {
@@ -2155,7 +2155,7 @@ function updateSpecialCharacters() {
     const specialCharsContainer = document.getElementById("special-characters");
 
     // Show special characters only if French version is selected
-    if (currentVersion === "french") {
+    if (currentVersion === "french" || currentVersion === "conjugaison") {
         specialCharsContainer.style.display = "flex"; // Show
     } else {
         specialCharsContainer.style.display = "none"; // Hide
@@ -2411,7 +2411,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-44 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-45 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
