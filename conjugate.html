@@ -152,7 +152,7 @@
             <button onclick="insertDiacritic('û')">û</button>
             <button onclick="insertDiacritic('ü')">ü</button>
         </div>
-        <input type="text" size="40" id="answer1" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+        <label for="je/j'" style="display: inline-block; width: 50px;">Je:</label> <input type="text" size="40" id="answer1" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
 	<input type="text" size="40" id="answer2" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
 	<input type="text" size="40" id="answer3" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
 	<input type="text" size="40" id="answer4" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
@@ -224,7 +224,7 @@ const wordLists = {
             }
 
             
-                wordDisplay.innerText = `Word: ${item.word}`;
+                wordDisplay.innerText = `Infinitive: ${item.word}`;
 		    
 
             document.getElementById("answer1").value = "";
@@ -233,6 +233,9 @@ const wordLists = {
 		document.getElementById("answer4").value = "";
 		document.getElementById("answer5").value = "";
 		document.getElementById("answer6").value = "";
+
+		document.getElementById("answer1").focus();
+
             document.getElementById("result").innerText = "";
 		document.querySelector('button[data-action="toggle-answer"]').innerText = "Show Answer";
 	document.getElementById("word-info").innerText = `Word ${currentIndex + 1}/${currentWordList.length}`; // Update progress
@@ -611,6 +614,8 @@ function loadTestWord() {
 	document.getElementById("answer4").value = "";
 	document.getElementById("answer5").value = "";
 	document.getElementById("answer6").value = "";
+	document.getElementById("answer1").focus();
+	
     document.getElementById("result").innerText = "";
 	document.querySelector('button[data-action="toggle-answer"]').innerText = "Show Answer";
     document.getElementById("word-info").innerText = `Test Attempt #${testAttempt} | Problem ${testIndex + 1}/${testWordOrder.length}`;
@@ -622,7 +627,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-6 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-7 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
