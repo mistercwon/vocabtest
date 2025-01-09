@@ -155,6 +155,16 @@
             <button onclick="insertDiacritic('û')">û</button>
             <button onclick="insertDiacritic('ü')">ü</button>
         </div>
+	    <!-- French Conjugation Inputs -->
+<div id="french-conjugation-container" class="inputs-container" style="display: none;">
+    <input type="text" placeholder="Je (Present)">
+    <input type="text" placeholder="Tu (Present)">
+    <input type="text" placeholder="Il/Elle/On (Present)">
+    <input type="text" placeholder="Nous (Present)">
+    <input type="text" placeholder="Vous (Present)">
+    <input type="text" placeholder="Ils/Elles (Present)">
+</div>
+
         <input type="text" id="answer" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
         <button data-action="toggle-answer" onclick="toggleAnswer()">Show Answer</button>
         <button onclick="checkAnswer()">Submit</button>
@@ -174,6 +184,7 @@
 
     <script>
 const wordLists = {
+	
     english: {
         1: [
             { word: "abate", definition: ["to lessen in intensity or degree"] },
@@ -1967,7 +1978,13 @@ const wordLists = {
             { word: "le secrétariat", definition: ["secretary"] },
             { word: "la téléphonie", definition: ["telephony"] }
         ]
-    }
+    },
+	french-conjugaison: 
+		{ 
+		1: [word: "parler", definition: ["parle", "parles", "parle", "parlons","parlez","parlent"],
+		word: "partir", definition: ["pars", "pars", "part", "partons", "partez", "partent"]
+	] 
+	    }
 };
 
         let currentVersion = "english";
@@ -2408,7 +2425,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 7 Jan 2025-43 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-44 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
