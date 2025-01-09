@@ -193,6 +193,27 @@ const wordLists = {
         let testIndex = 0;
 	let wrongOnFirstTry = new Set(); // Tracks words answered wrong at least once
 	let testAttempt = 1;
+	    let focusedInput = null;
+
+        // Add event listeners to the input boxes
+        document.getElementById("answer1").addEventListener("focus", function() {
+            focusedInput = document.getElementById("answer1");
+        });
+        document.getElementById("answer2").addEventListener("focus", function() {
+            focusedInput = document.getElementById("answer2");
+        });
+        document.getElementById("answer3").addEventListener("focus", function() {
+            focusedInput = document.getElementById("answer3");
+        });
+        document.getElementById("answer4").addEventListener("focus", function() {
+            focusedInput = document.getElementById("answer4");
+        });
+        document.getElementById("answer5").addEventListener("focus", function() {
+            focusedInput = document.getElementById("answer5");
+        });
+        document.getElementById("answer6").addEventListener("focus", function() {
+            focusedInput = document.getElementById("answer6");
+        });
 
 
         function initialize() {
@@ -627,7 +648,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-16 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-17 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
@@ -649,28 +670,23 @@ function insertCharacter(character) {
 }
 
 function insertDiacritic(diacritic) {
-    // Get the currently focused input element
-    const inputElement = document.activeElement;
+            if (focusedInput) {
+                const start = focusedInput.selectionStart;
+                const end = focusedInput.selectionEnd;
+                const currentValue = focusedInput.value;
 
-    // Ensure the active element is a valid input or textarea
-    if (inputElement.tagName === "INPUT" || inputElement.tagName === "TEXTAREA") {
-        // Get the current cursor position
-        const start = inputElement.selectionStart;
-        const end = inputElement.selectionEnd;
-        const currentValue = inputElement.value;
+                // Insert the diacritic at the cursor position
+                focusedInput.value = currentValue.slice(0, start) + diacritic + currentValue.slice(end);
 
-        // Insert the diacritic at the cursor position
-        inputElement.value = currentValue.slice(0, start) + diacritic + currentValue.slice(end);
+                // Move the cursor to after the inserted character
+                focusedInput.selectionStart = focusedInput.selectionEnd = start + diacritic.length;
 
-        // Move the cursor to after the inserted character
-        inputElement.selectionStart = inputElement.selectionEnd = start + diacritic.length;
-
-        // Refocus on the input element (optional, ensures focus remains)
-        inputElement.focus();
-    } else {
-        console.warn("No valid input field is currently focused.");
-    }
-}
+                // Refocus on the input element (this is usually redundant)
+                focusedInput.focus();
+            } else {
+                console.log('No input field is currently focused.');
+            }
+        }
 
 
 
