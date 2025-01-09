@@ -2081,35 +2081,7 @@ function populateVersionDropdown() {
 }
 
 // Function to update the chapter dropdown dynamically based on selected version
-function updateChapterDropdown() {
-    const versionSelect = document.getElementById("version-select");
-    const chapterSelect = document.getElementById("chapter-select");
-    
-    // Clear any existing options
-    chapterSelect.innerHTML = "";
 
-    const selectedVersion = versionSelect.value;
-
-	 // Add "All" option for the user to select all chapters
-    const allOption = document.createElement('option');
-    allOption.value = "all";
-    allOption.textContent = "All";
-    chapterSelect.appendChild(allOption);
-
-    // Populate chapter dropdown dynamically based on the selected version
-    const chapters = Object.keys(wordLists[selectedVersion]);
-    chapters.forEach(chapter => {
-        const option = document.createElement('option');
-        option.value = chapter;
-        option.textContent = `${chapter}`;
-        chapterSelect.appendChild(option);
-    });
-
-   
-
-    // Set default chapter to the first one in the list
-    chapterSelect.value = chapters[0];
-}
 
 function updateChapterDropdown() {
     const chapterSelect = document.getElementById("chapter-select");
@@ -2411,7 +2383,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-45 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-46 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
