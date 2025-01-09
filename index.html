@@ -1967,7 +1967,13 @@ const wordLists = {
             { word: "le secrétariat", definition: ["secretary"] },
             { word: "la téléphonie", definition: ["telephony"] }
         ]
-    }
+    },
+	frenchconj: {
+		1: [
+			{word: "parler", definition: ["je parle", "tu parles", "il parle", "nous parlons", "vous parlez", "ils parlent"]},
+			{word: "finir", definition: ["je finis", "tu finis", "il finit", "nous finissons", "vous finissez", "ils finissent"]}
+		]
+	}
 };
 
         let currentVersion = "english";
@@ -2152,7 +2158,7 @@ function updateSpecialCharacters() {
     const specialCharsContainer = document.getElementById("special-characters");
 
     // Show special characters only if French version is selected
-    if (currentVersion === "french") {
+    if (currentVersion === "french" || currentVersion = "frenchconj") {
         specialCharsContainer.style.display = "flex"; // Show
     } else {
         specialCharsContainer.style.display = "none"; // Hide
@@ -2408,7 +2414,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 7 Jan 2025-43 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 9 Jan 2025-44 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
