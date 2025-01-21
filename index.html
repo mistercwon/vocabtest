@@ -2181,7 +2181,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function checkAnswer() {
-    const userAnswer = document.getElementById("answer").value.trim().toLowerCase();
+	
+    const userAnswerbefapo = document.getElementById("answer").value.trim().toLowerCase();
+    const userAnswer=userAnswerbefapo.replace(/’/g, "'"); // Replace curly apostrophes with straight ones
     const currentWordIndex = testMode ? testIndex : currentIndex;
     const currentWord = testMode ? currentWordList[testWordOrder[testIndex]] : currentWordList[currentWordIndex];
     const correctAnswers = swapWordAndDefinition
@@ -2406,7 +2408,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 13 Jan 2025-53 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 22 Jan 2025-54 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
