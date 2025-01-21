@@ -637,12 +637,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function checkAnswer() {
-    const userAnswer1 = document.getElementById("answer1").value.trim().toLowerCase();
-	const userAnswer2 = document.getElementById("answer2").value.trim().toLowerCase();
-	const userAnswer3 = document.getElementById("answer3").value.trim().toLowerCase();
-	const userAnswer4 = document.getElementById("answer4").value.trim().toLowerCase();
-	const userAnswer5 = document.getElementById("answer5").value.trim().toLowerCase();
-	const userAnswer6 = document.getElementById("answer6").value.trim().toLowerCase();
+
+    const userAnswer1 = document.getElementById("answer1").value.trim().toLowerCase().replace(/’/g, "'");
+	const userAnswer2 = document.getElementById("answer2").value.trim().toLowerCase().replace(/’/g, "'");
+	const userAnswer3 = document.getElementById("answer3").value.trim().toLowerCase().replace(/’/g, "'");
+	const userAnswer4 = document.getElementById("answer4").value.trim().toLowerCase().replace(/’/g, "'");
+	const userAnswer5 = document.getElementById("answer5").value.trim().toLowerCase().replace(/’/g, "'");
+	const userAnswer6 = document.getElementById("answer6").value.trim().toLowerCase().replace(/’/g, "'");
     const currentWordIndex = testMode ? testIndex : currentIndex;
     const currentWord = testMode ? currentWordList[testWordOrder[testIndex]] : currentWordList[currentWordIndex];
     const correctAnswers = currentWord.definition.map(def => def.toLowerCase());
@@ -867,7 +868,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 14 Jan 2025-33 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 22 Jan 2025-34 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
