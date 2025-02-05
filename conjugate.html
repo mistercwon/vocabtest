@@ -153,12 +153,12 @@
             <button onclick="insertDiacritic('û')">û</button>
             <button onclick="insertDiacritic('ü')">ü</button>
         </div>
-        <label for="je" style="display: inline-block; width: 80px;" text="Je/J': "></label> 	<input type="text" id="answer1" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
-	<label for="tu" style="display: inline-block; width: 80px;">Tu:</label>		<input type="text" id="answer2" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
-	<label for="il" style="display: inline-block; width: 80px;">Il/Elle/On:</label>	<input type="text" id="answer3" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
-	<label for="nous" style="display: inline-block; width: 80px;">Nous:</label>	<input type="text" id="answer4" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
-	<label for="vous" style="display: inline-block; width: 80px;">Vous:</label>	<input type="text" id="answer5" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
-	<label for="ils" style="display: inline-block; width: 80px;">Ils/Elles:</label>	<input type="text" id="answer6" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+        <label for="je" id="label-je" style="display: inline-block; width: 80px;">Je/J':</label> 	<input type="text" id="answer1" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+	<label for="tu" id="label-tu" style="display: inline-block; width: 80px;">Tu:</label>		<input type="text" id="answer2" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+	<label for="il" id="label-il" style="display: inline-block; width: 80px;">Il/Elle/On:</label>	<input type="text" id="answer3" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+	<label for="nous" id="label-nous" style="display: inline-block; width: 80px;">Nous:</label>	<input type="text" id="answer4" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+	<label for="vous" id="label-vous" style="display: inline-block; width: 80px;">Vous:</label>	<input type="text" id="answer5" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+	<label for="ils"  id="label-ils" style="display: inline-block; width: 80px;">Ils/Elles:</label>	<input type="text" id="answer6" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
         <button data-action="toggle-answer" onclick="toggleAnswer()">Show Answer</button>
         <button onclick="checkAnswer()">Submit</button>
         <button id="test-mode-btn" onclick="startTestMode()">Test Mode</button>
@@ -486,6 +486,39 @@ const wordLists = {
         }
 
 
+function updateConjugationLabels() {
+    const frenchLabels = {
+        je: "Je/J'",
+        tu: "Tu",
+        il: "Il/Elle/On",
+        nous: "Nous",
+        vous: "Vous",
+        ils: "Ils/Elles"
+    };
+
+    const jynhwhynincalphigLabels = {
+        je: "mju",
+        tu: "sju",
+        il: "phju",
+        nous: "mlju",
+        vous: "slju",
+        ils: "phlju"
+    };
+
+    if (currentVersion === "french") {
+        labels = frenchLabels;
+    } else if (currentVersion === "jynhwhynin_calphig") {
+        labels = jynhwhynincalphigLabels;
+    }
+
+    // Update the label text based on the language
+    document.getElementById("label-je").innerText = labels.je;
+    document.getElementById("label-tu").innerText = labels.tu;
+    document.getElementById("label-il_elle_on").innerText = labels.il_elle_on;
+    document.getElementById("label-nous").innerText = labels.nous;
+    document.getElementById("label-vous").innerText = labels.vous;
+    document.getElementById("label-ils_elles").innerText = labels.ils_elles;
+}
 
 
 
@@ -603,22 +636,7 @@ function changeVersion() {
     updateChapterDropdown();
     changeChapter();  // Update word list based on version and chapter
     updateSpecialCharacters();
-	if (version === 'french'){
-	document.getElementById("je").innerText = "Je/J'";
-	document.getElementById("tu").innerText = "Tu'";
-	document.getElementById("il").innerText = "Il/Elle/On";
-	document.getElementById("nous").innerText = "Nous";
-	document.getElementById("vous").innerText = "Vous";
-	document.getElementById("ils").innerText = "Ils/Elles";	
-	}
-	else if (version === 'jynhwhynin_calphig'){
-	document.getElementById("je").innerText = "mju";
-	document.getElementById("tu").innerText = "sju'";
-	document.getElementById("il").innerText = "phju";
-	document.getElementById("nous").innerText = "mlju";
-	document.getElementById("vous").innerText = "slju";
-	document.getElementById("ils").innerText = "phlju";	
-	}
+    updateConjugationLabels();
 }
 
 // Function to update special characters visibility (for French mode)
@@ -890,7 +908,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 5 Feb 2025-36 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 5 Feb 2025-37 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
