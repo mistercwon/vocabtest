@@ -157,6 +157,7 @@
             <button onclick="insertDiacritic('ü')">ü</button>
         </div>
         <input type="text" id="answer" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+	<button data-action="toggle-ipa" onclick="showIPA()">IPA</button>
         <button data-action="toggle-answer" onclick="toggleAnswer()">Show Answer</button>
         <button onclick="checkAnswer()">Submit</button>
         <button id="test-mode-btn" onclick="startTestMode()">Test Mode</button>
@@ -1032,7 +1033,7 @@ const wordLists = {
 	
     french: {
         1: [
-            { word: "avoir des enfants", definition: ["to have children", "to have kids"] },
+            { word: "avoir des enfants", definition: ["to have children", "to have kids"], ipa: "avwaːʀ dez‿ɑ̃fɑ̃" },
             { word: "un(e) célibataire", definition: ["a single", "not a couple"] },
             { word: "être célibataire", definition: ["to be single"] },
             { word: "un(e) citadin(e)", definition: ["a city person", "a citizen"] },
@@ -2078,6 +2079,32 @@ const wordLists = {
 		
         }
 
+
+
+
+	    function showIPA() {
+
+            const resultElement = document.getElementById("result");
+            const toggleButton = document.querySelector('button[data-action="toggle-ipa"]');
+            const currentWord = testMode ? currentWordList[testWordOrder[testIndex]] : currentWordList[currentIndex];
+
+            if (toggleButton.innerText === "Show IPA") {
+                const correctAnswer = currentWord.ipa;
+		    
+                resultElement.innerText = correctAnswer;
+		    resultElement.style.color="black";
+                toggleButton.innerText = "Hide IPA";
+            } else {
+                resultElement.innerText = "";
+                toggleButton.innerText = "Show IPA";
+            }
+		
+        }
+
+
+
+	    
+
 	    // Function to populate the version dropdown dynamically
 function populateVersionDropdown() {
     const versionSelect = document.getElementById("version-select");
@@ -2408,7 +2435,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 27 Jan 2025-55 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 6 Feb 2025-56 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
