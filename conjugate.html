@@ -396,7 +396,13 @@ const wordLists = {
             { word: "valoir", definition: ["vaille", "vailles", "vaille", "valions", "valiez", "vaillent"], }
         ]	        
 
-    }
+    },
+
+	jynhwhynin_calphig: {
+		INDICATIVE_present: [
+			{word: "minhph", definition: ["minhkho","minhkha","minhkhu","minhso","minhsa","minhsu" ]}
+		]		
+	}
 };
 
 
@@ -597,6 +603,22 @@ function changeVersion() {
     updateChapterDropdown();
     changeChapter();  // Update word list based on version and chapter
     updateSpecialCharacters();
+	if (version === 'french'){
+	document.getElementById("je").innerText = "Je/J'";
+	document.getElementById("tu").innerText = "Tu'";
+	document.getElementById("il").innerText = "Il/Elle/On";
+	document.getElementById("nous").innerText = "Nous";
+	document.getElementById("vous").innerText = "Vous";
+	document.getElementById("ils").innerText = "Ils/Elles";	
+	}
+	else if (version === 'jynhwhynin_calphig'){
+	document.getElementById("je").innerText = "mju";
+	document.getElementById("tu").innerText = "sju'";
+	document.getElementById("il").innerText = "phju";
+	document.getElementById("nous").innerText = "mlju";
+	document.getElementById("vous").innerText = "slju";
+	document.getElementById("ils").innerText = "phlju";	
+	}
 }
 
 // Function to update special characters visibility (for French mode)
@@ -868,7 +890,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 22 Jan 2025-34 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 5 Feb 2025-35 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
