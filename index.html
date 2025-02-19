@@ -1031,7 +1031,7 @@ const wordLists = {
         ]
     },
 	
-    french: {
+    delf_a2: {
         1: [
             { word: "avoir des enfants", definition: ["to have children", "to have kids"], ipa: "avwaːʀ dez‿ɑ̃fɑ̃" },
             { word: "un(e) célibataire", definition: ["a single", "not a couple"], ipa:"selibatεːʀ" },
@@ -1975,7 +1975,53 @@ const wordLists = {
             { word: "la mode", definition: ["fashion"] },
             { word: "le secrétariat", definition: ["secretary"] },
             { word: "la téléphonie", definition: ["telephony"] }
+        ],
+        12: [
+            { word: "les milieux naturels", definition: ["natural environments"] },
+            { word: "les espaces protégés", definition: ["protected areas", "conservation areas"] },
+            { word: "le désert", definition: ["desert"] },
+            { word: "la forêt", definition: ["forest"] },
+            { word: "la jungle", definition: ["jungle"] },
+            { word: "le littoral", definition: ["coastline"] },
+            { word: "la montagne", definition: ["mountain"] },
+            { word: "l'océan (m)", definition: ["ocean"] },
+            { word: "le parc national", definition: ["national park"] },
+            { word: "la réserve naturelle", definition: ["nature reserve"] },
+            { word: "la flore", definition: ["flora"] },
+            { word: "l'arbre (m)", definition: ["tree"] },
+            { word: "le bourgeon", definition: ["bud"] },
+            { word: "la branche", definition: ["branch"] },
+            { word: "la feuille", definition: ["leaf", "foliage"] },
+            { word: "la graine", definition: ["seed", "grain"] },
+            { word: "la fleur", definition: ["flower"] },
+            { word: "la plante", definition: ["plant"] },
+            { word: "la racine", definition: ["root"] },
+            { word: "la terre", definition: ["earth"] },
+            { word: "le tronc", definition: ["trunk"] },
+            { word: "la faune", definition: ["fauna"] },
+            { word: "les animaux domestique", definition: ["domestic animals"] },
+            { word: "les animaux sauvages", definition: ["wild animals"] },
+            { word: "l'espèce (f)", definition: ["species"] },
+            { word: "le prédateur", definition: ["predator"] },
+            { word: "la proie", definition: ["prey"] },
+            { word: "agir pour l'environnement", definition: ["to act for the environment"] },
+            { word: "s'impliquer dans...", definition: ["to get involved in"] },
+            { word: "faires des économies d'énergie", definition: ["to save energy"] },
+            { word: "préserver", definition: ["to preserve"] },
+            { word: "protéger", definition: ["to protect"] },
+            { word: "recycler", definition: ["to recycle"] },
+            { word: "respecter", definition: ["to respect"] },
+            { word: "trier les déchets", definition: ["to sort waste"] },
+            { word: "la pollution", definition: ["pollution"] },
+            { word: "le déchet", definition: ["waste"] },
+            { word: "l'emballage (m)", definition: ["packaging"] },
+            { word: "les gaz à effet de serre (m)", definition: ["greenhouse gases"] },
+            { word: "trier les déchets", definition: ["to sort waste"] },
+            { word: "la marée noire", definition: ["oil spill"] },
+            { word: "le mégot de cigarette", definition: ["cigarette butt"] },
+            { word: "le pétrole", definition: ["petrol", "oil"] }
         ]
+	    
     },
 	le_petit_prince: {
 		1:[
@@ -2177,7 +2223,7 @@ function updateSpecialCharacters() {
     const specialCharsContainer = document.getElementById("special-characters");
 
     // Show special characters only if French version is selected
-    if (currentVersion === "french" || currentVersion === "conjugaison") {
+    if (currentVersion === "delf_a2") {
         specialCharsContainer.style.display = "flex"; // Show
     } else {
         specialCharsContainer.style.display = "none"; // Hide
@@ -2435,7 +2481,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 6 Feb 2025-56 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 19 Feb 2025-57 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
