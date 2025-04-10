@@ -462,6 +462,15 @@ const wordLists = {
 		CONDITIONAL_tenseless: [
 			{word: "minhph", definition: ["minhphjo","minhphja","minhphju","minhphljo","minhphlja","minhphlju" ]}
 		]
+	},
+
+	french_pronouns: {
+		INDICATIVE: [
+			{word: "pronoun order", definition: ["ne","me/te/se/nous/vous","le/la/les","lui/leur","y","en" ]}
+		],
+		IMPERATIVE: [
+			{word: "pronoun order", definition: ["le/la/les","lui/leur","moi/toi/nous/vous","y","en","" ]}
+		]
 	}
 };
 
@@ -565,11 +574,26 @@ function updateConjugationLabels() {
         ils: "phlju"
     };
 
+    const frenchpronounsLabels = {
+        je: "1",
+        tu: "2",
+        il: "3",
+        nous: "4",
+        vous: "5",
+        ils: "6"
+    };
+
+	
+
     if (currentVersion === "french") {
         labels = frenchLabels;
     } else if (currentVersion === "jynhwhynin_calphig") {
         labels = jynhwhynincalphigLabels;
+    } else if (currentVersion === "french_pronouns") {
+        labels = frenchpronounsLabels;
     }
+	
+	
 
     // Update the label text based on the language
     document.getElementById("label-je").innerText = labels.je;
@@ -968,7 +992,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 10 Feb 2025-41 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 11 Apr 2025-42 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
