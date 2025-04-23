@@ -2260,8 +2260,12 @@ const wordLists = {
             const currentWord = testMode ? currentWordList[testWordOrder[testIndex]] : currentWordList[currentIndex];
 
             if (toggleButton.innerText === "Show Ex") {
-                const correctAnswer = currentWord.ex;
-		    
+		const correctAnswerList=currentWord.ex;
+		if (correctAnswerList.length === 0) {correctAnswer="";}
+		    else{
+		const idx = Math.floor(Math.random() * correctAnswerList.length);
+                const correctAnswer = correctAnswerList[idx];
+		    }  
                 resultElement.innerText = correctAnswer;
 		    resultElement.style.color="black";
                 toggleButton.innerText = "Hide Ex";
@@ -2606,7 +2610,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 24 Apr 2025-62 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 24 Apr 2025-63 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
