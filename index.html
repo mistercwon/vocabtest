@@ -158,7 +158,6 @@
         </div>
         <input type="text" id="answer" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
 	<button data-action="toggle-ipa" onclick="showIPA()">Show IPA</button>
-	<button data-action="toggle-ex" onclick="showEx()">Show Ex</button>
         <button data-action="toggle-answer" onclick="toggleAnswer()">Show Answer</button>
         <button onclick="checkAnswer()">Submit</button>
         <button id="test-mode-btn" onclick="startTestMode()">Test Mode</button>
@@ -185,8 +184,7 @@
 const wordLists = {
     english: {
         1: [
-            { word: "abate", definition: ["to lessen in intensity or degree"], ex:["We realized with great relief that the storm had abated before breaking through the sea wall.
-, "Attempts by the administration to abate the intensity of the controversy were mostly unsuccessful; it continued to consume everyone's attention.", "The city's new noise abatement plan targeted live music venues, but many people felt the focus should be on decreasing the number of low flying airplanes passing over the city."] },
+            { word: "abate", definition: ["to lessen in intensity or degree"] },
             { word: "abberant", definition: ["deviating from the norm"] },
             { word: "abjure", definition: ["to renounce or reject solemnly", "to recant", "to avoid"] },
             { word: "abrogate", definition: ["to abolish or annul by authority", "put down"] },
@@ -2253,29 +2251,6 @@ const wordLists = {
 		
         }
 
-	    function showEx() {
-
-            const resultElement = document.getElementById("result");
-            const toggleButton = document.querySelector('button[data-action="toggle-ex"]');
-            const currentWord = testMode ? currentWordList[testWordOrder[testIndex]] : currentWordList[currentIndex];
-
-            if (toggleButton.innerText === "Show Ex") {
-		const correctAnswerList=currentWord.ex;
-		if (correctAnswerList.length === 0) {correctAnswer="";}
-		    else{
-		const idx = Math.floor(Math.random() * correctAnswerList.length);
-                const correctAnswer = correctAnswerList[idx];
-		    }  
-                resultElement.innerText = correctAnswer;
-		    resultElement.style.color="black";
-                toggleButton.innerText = "Hide Ex";
-            } else {
-                resultElement.innerText = "";
-                toggleButton.innerText = "Show Ex";
-            }
-		
-        }
-
 
 
 	    
@@ -2610,7 +2585,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 24 Apr 2025-63 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
+document.getElementById("last-updated").innerText = "Version: 24 Apr 2025-61 by Wonhyuk Lee. mistercwon@gmail.com"; // Static date
 
 
 
