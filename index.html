@@ -2260,6 +2260,7 @@ const wordLists = {
 
             if (toggleButton.innerText === "Show Ex") {
                 const correctAnswer = currentWord.ex.join("<br>");
+		    document.getElementById("exampleContainer").innerHTML = correctAnswer;
 		    
                 resultElement.innerText = correctAnswer;
 		    resultElement.style.color="black";
