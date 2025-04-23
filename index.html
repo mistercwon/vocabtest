@@ -95,7 +95,7 @@
 
         .test-mode {
             border: 3px solid #f44336;
-            background-color: #f44336;
+            background-color: #fff4f4;
         }
         .updated-info {
             position: fixed;
@@ -2196,10 +2196,12 @@ const wordLists = {
                 wordDisplay.innerText = `Word: ${item.word}`;
 		    
             }
-
+	
             document.getElementById("answer").value = "";
             document.getElementById("result").innerText = "";
 		document.querySelector('button[data-action="toggle-answer"]').innerText = "Show Answer";
+		document.getElementById("test-mode-btn").innerText = "Test Mode";
+   		document.getElementById("test-mode-btn").style.backgroundColor = "#f44336";
 	document.getElementById("word-info").innerText = `Word ${currentIndex + 1}/${currentWordList.length}`; // Update progress
         }
 
