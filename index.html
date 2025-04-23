@@ -2259,7 +2259,7 @@ const wordLists = {
             const currentWord = testMode ? currentWordList[testWordOrder[testIndex]] : currentWordList[currentIndex];
 
             if (toggleButton.innerText === "Show Ex") {
-                const correctAnswer = currentWord.ex.join(""\n);
+                const correctAnswer = currentWord.ex.join("\n ");
 		    
                 resultElement.innerText = correctAnswer;
 		    resultElement.style.color="black";
