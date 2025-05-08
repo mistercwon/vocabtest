@@ -183,7 +183,7 @@
 
     <script>
 const wordLists = {
-    english: {
+    GRE: {
         1: [
             { word: "abate", definition: ["to lessen in intensity or degree"], ipa: "əˈbeɪt", ex: ["We realized with great relief that the storm had abated before breaking through the sea wall.", "Attempts by the administration to abate the intensity of the controversy were mostly unsuccessful; it continued to consume everyone's attention.", "The city's new noise abatement plan targeted live music venues, but many people felt the focus should be on decreasing the number of low flying airplanes passing over the city."] },
             { word: "abberant", definition: ["deviating from the norm"], ipa: "əˈbɛrənt" },
@@ -2246,7 +2246,7 @@ const wordLists = {
 	}
 };
 
-        let currentVersion = "english";
+        let currentVersion = "GRE";
         let currentChapter = "all";
         let currentWordList = [];
         let currentIndex = 0;
@@ -2449,7 +2449,7 @@ function updateSpecialCharacters() {
     const specialCharsContainer = document.getElementById("special-characters");
 
     // Show special characters only if French version is selected
-    if (currentVersion === "delf_a2") {
+    if (currentVersion === "delf_a2" || currentVersion === "delf_b1" || currentVersion === "Le_petit_prince" || currentVersion === "Fr_pronoun_ex") {
         specialCharsContainer.style.display = "flex"; // Show
     } else {
         specialCharsContainer.style.display = "none"; // Hide
@@ -2707,7 +2707,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 08 May 2025-66"; // Static date
+document.getElementById("last-updated").innerText = "Version: 08 May 2025-67"; // Static date
 
 
 
