@@ -130,6 +130,11 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
         }
 
+	.test-mode {
+            border: 3px solid #f44336;
+            background-color: #fff4f4;
+        }
+
     </style>
 </head>
 <body>
@@ -2802,7 +2807,6 @@ testAttempt=1;
 
     const button = document.getElementById("test-mode-btn");
     button.innerText = "End Test Mode";
-    button.style.backgroundColor = "#f44336";
     document.querySelector(".container").classList.add("test-mode");
 
 	const randomCheckbox = document.getElementById("random-toggle");
