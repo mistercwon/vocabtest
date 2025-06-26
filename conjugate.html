@@ -84,7 +84,7 @@
         .word-navigation button {
             padding: 10px 20px;
             font-size: 1em;
-            background-color: #007BFF;
+            background-color: #2ecc71;
             border: 1px solid #ccc;
             border-radius: 5px;
             cursor: pointer;
@@ -93,10 +93,37 @@
             background-color: #ddd;
         }
 
-        .test-mode {
-            border: 3px solid #f44336;
-            background-color: #fff4f4;
+	.gtest-mode {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
+
+	.gtest-mode button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #f44336;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .gtest-mode button:hover {
+            background-color: #bd362d;
+        }
+
+	.site-navigation button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #6c3483;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .site-navigation button:hover {
+            background-color: #ddd;
+        }
+
         .updated-info {
             position: fixed;
             bottom: 10px;
@@ -109,6 +136,12 @@
             border-radius: 5px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
         }
+
+	.test-mode {
+            border: 3px solid #f44336;
+            background-color: #fff4f4;
+        }
+
 
     </style>
 </head>
@@ -159,11 +192,14 @@
 	<label for="nous" id="label-nous" style="display: inline-block; width: 80px;">Nous:</label>	<input type="text" id="answer4" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
 	<label for="vous" id="label-vous" style="display: inline-block; width: 80px;">Vous:</label>	<input type="text" id="answer5" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
 	<label for="ils"  id="label-ils" style="display: inline-block; width: 80px;">Ils/Elles:</label>	<input type="text" id="answer6" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+		<p id="result"></p>
+        	<p id="word-info"></p>
         <button data-action="toggle-answer" onclick="toggleAnswer()">Show Answer</button>
         <button onclick="checkAnswer()">Submit</button>
-        <button id="test-mode-btn" onclick="startTestMode()">Test Mode</button>
-        <p id="result"></p>
-        <p id="word-info"></p>
+	<div class="gtest-mode">
+        	<button id="test-mode-btn" onclick="startTestMode()">Test Mode</button>
+	</div>
+
         <div class="word-navigation">
 	<button id="first-word-btn" onclick="gotoWord(0)"> << </button>
             <button id="prev-word-btn" onclick="navigateWord(-1)">← Previous</button>
@@ -173,8 +209,8 @@
 		<div class="site-navigation">
 		<a href="../main/"><button>Main</button></a>
 		<a href="./"><button>Home</button></a>
-		<a href="conjugate.html"><button>Conjugation</button>
-</a>	
+		<a href="conjugate.html"><button>Conjugation</button></a>
+		<a href="help.html"><button>?</button></a>
 	</div>
         <div class="updated-info">
             Last Updated: <span id="last-updated"></span>
@@ -782,7 +818,12 @@ function checkAnswer() {
 
     const resultElement = document.getElementById("result");
 
-    if ( (userAnswer1==correctAnswer1 && userAnswer2==correctAnswer2 && userAnswer3==correctAnswer3 && userAnswer4==correctAnswer4 && userAnswer5==correctAnswer5 && userAnswer6==correctAnswer6) || userAnswer1=="a") {
+if (/^\d+$/.test(userAnswer1.trim())){
+        const jumpToIndex = parseInt(userAnswer, 10) - 1; // users use 1-based index
+        gotoWord(jumpToIndex);
+    }
+
+    else if ( (userAnswer1==correctAnswer1 && userAnswer2==correctAnswer2 && userAnswer3==correctAnswer3 && userAnswer4==correctAnswer4 && userAnswer5==correctAnswer5 && userAnswer6==correctAnswer6) || userAnswer1=="a") {
         resultElement.innerText = "Correct!";
         resultElement.style.color = "green";
 
@@ -994,7 +1035,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 9 May 2025-44"; // Static date
+document.getElementById("last-updated").innerText = "Version: 26 June 2025-45"; // Static date
 
 
 
@@ -1033,6 +1074,7 @@ function insertDiacritic(diacritic) {
                 console.log('No input field is currently focused.');
             }
         }
+
 
 
 
