@@ -2638,22 +2638,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function checkAnswer() {
 
-// Jump-to-word feature
-    if (/^\d+$/.test(userAnswer)) {
-        const jumpToIndex = parseInt(userAnswer, 10) - 1; // users use 1-based index
-        if (jumpToIndex >= 0 && jumpToIndex < currentWordList.length) {
-            if (testMode) {
-                testIndex = jumpToIndex;
-                loadTestWord();
-            } else {
-                currentIndex = jumpToIndex;
-                loadWord();
-            }
-            inputField.value = ""; // Clear the input box
-            document.getElementById("result").innerText = ""; // Clear result
-            return;
-        }
-    }
+
 	
     const userAnswerbefapo = document.getElementById("answer").value.trim().toLowerCase();
     const userAnswer=userAnswerbefapo.replace(/’/g, "'"); // Replace curly apostrophes with straight ones
@@ -2665,7 +2650,12 @@ function checkAnswer() {
 
     const resultElement = document.getElementById("result");
 
-    if (correctAnswers.includes(userAnswer) || userAnswer=="a") {
+
+    if (/^\d+$/.test(userAnswer.trim())){
+        const jumpToIndex = parseInt(userAnswer, 10) - 1; // users use 1-based index
+        gotoWord(jumpToIndex);
+    }
+    else if (correctAnswers.includes(userAnswer) || userAnswer=="a") {
         resultElement.innerText = "Correct!";
         resultElement.style.color = "green";
 
@@ -2881,7 +2871,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 26 June 2025-71"; // Static date
+document.getElementById("last-updated").innerText = "Version: 26 June 2025-72"; // Static date
 
 
 
