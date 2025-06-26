@@ -1,0 +1,355 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Quiz Help</title>
+	<link rel="icon" href="Wicon.ico" type="image/x-icon"> 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            font-size: 1.2em;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        select {
+            padding: 5px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1.2em;
+            box-sizing: border-box; /* Ensure padding is included in width calculation */
+        }
+        button {
+            padding: 12px 24px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+
+	.site-navigation button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #6c3483;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .site-navigation button:hover {
+            background-color: #ddd;
+        }
+
+        .updated-info {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.9em;
+            color: #555;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Word Quiz Help</h1>
+	<ul align="left">
+		<li > Type the correct answer and press Enter (or click "Submit")</li>
+<li> If it's correct, you'll move to the next word. (For Conjugation, you need to get all six answers right)</li>
+<li> Type "a" if you want to be marked correctly anyway. </li>
+<li> Type a number (e.g. 5) and press Enter to jump to that word in the list.</li>
+<li> Use diacritic buttons (é, è, etc.) if needed.</li>
+<li> In test mode, you will be quizzed on every word from the chapter in random order. If you get everything right in a cycle test mode will automatically terminate.</li>
+<li> In test mode, missed answers are tracked and will be tested twice in the next cycle.</li>
+<li> You can toggle between word/definition with the Swap button.</li>
+<li> If you toggle the Random button, the next word will be a random word from the chapter.</li>
+	</ul>
+<hr>
+<ol align="left">
+<li>"GRE" vocab list, definitions, examples are directly from GRE Power Vocab by The Princeton Review. (ISBN: 978-1-101-88178-1) </li>
+<li> "DELF_a2/b1" vocab lists are directly from Édito DELF A2 (2016 Edition, ISBN 978-2-278-08319-0) and B1 (2018 Edition, ISBN 978-2-278-08773-0). </li>
+<li>"Le_petit_prince" vocab list is my excerption from <Le Petit Prince>. </li>
+<li>"Fr_pronoun_ex" is my attempt to familiarise myself with pronoun order in French, and comprises eclectic sources, including ChatGPT's imagination (and my modification to it) and French dubbed Star Wars. </li>
+<li>"Hanja" (한자)는 한국어문회 지정 한자입니다. 한국어문회에서 제공하는 엑셀 파일을 기초로 제가 코딩하여 제 웹사이트의 형식으로 맞춘 것으로, 한자의 훈음 또한 어문회에서 공식으로 제공하는 것을 그대로 따른 것입니다. (훈음이 여러 개거나 장/단음이 모두 가능할 때에는 약간의 오류가 있을 수도 있습니다) Chapter 또한 어문회의 분류기준을 따른 것입니다: <table border="1" style="border-collapse: collapse; text-align: center;">
+  <thead>
+    <tr>
+      <th>코드</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>00</td><td>특급 신습한자</td></tr>
+    <tr><td>02</td><td>특급Ⅱ 신습한자</td></tr>
+    <tr><td>10</td><td>1급 신습한자</td></tr>
+    <tr><td>12</td><td>2급 신습한자중 1급 쓰기 범위에 포함되지 않는 인명지명용 350자</td></tr>
+    <tr><td>20</td><td>2급 신습한자</td></tr>
+    <tr><td>30</td><td>3급 신습한자</td></tr>
+    <tr><td>32</td><td>3급Ⅱ 신습한자</td></tr>
+    <tr><td>40</td><td>4급 신습한자</td></tr>
+    <tr><td>42</td><td>4급Ⅱ 신습한자</td></tr>
+    <tr><td>50</td><td>5급 신습한자</td></tr>
+    <tr><td>52</td><td>5급Ⅱ 신습한자</td></tr>
+    <tr><td>60</td><td>6급 신습한자</td></tr>
+    <tr><td>62</td><td>6급Ⅱ 신습한자</td></tr>
+    <tr><td>70</td><td>7급 신습한자</td></tr>
+    <tr><td>72</td><td>7급Ⅱ 신습한자</td></tr>
+    <tr><td>80</td><td>8급 신습한자</td></tr>
+  </tbody>
+</table>
+
+ 이 중 일부 급수는 제가 급수 내에서 한 Chapter에 20자 정도가 되도록 분할한 것도 있습니다. (예로 "30가"는 3급 신습한자 중 "却 (물리칠 각)"부터 "愧 (부끄러울 괴:)"까지 22자가 포함된 Chapter입니다)</li>
+ 
+
+</ol>
+
+<hr>
+	<ul align="left">
+<li> "Show Answer" will show you the answer. If there are multiple definitions a semi-colon (;) separates them.</li>
+<li> "Show IPA" will show you the pronounciation written in the international phonetic alphabet, if I bothered to add it. "Hanja" (한자)에서는 "Show IPA"를 누루면 한자의 부수와 부수 제외 획수가 나옵니다. </li>
+<li> "Show Ex" will show you example words or sentences, if I bothered to add them. </li>
+<li> Use the word navigation buttons (green) to navigate words within the chapter.</li>
+<li> Use the site navigation buttons (purple) to navigate related websites. </li>
+<li> If you want your list to be added to this website, make sure your list is in the following format: 
+<pre>
+GRE: {
+        1: [
+            { word: "abate", definition: ["to lessen in intensity or degree"], 
+	ipa: "əˈbeɪt", 
+	ex: ["We realized with great relief that the storm had abated before 
+		breaking through the sea wall.", 
+	"Attempts by the administration to abate the intensity of the 
+		controversy were mostly unsuccessful; 
+		it continued to consume everyone's attention.", 
+	"The city's new noise abatement plan targeted live music venues, 
+		but many people felt the focus 
+		should be on decreasing the number of low flying airplanes 
+		passing over the city."] },
+            { word: "abberant", definition: ["deviating from the norm"], 
+	ipa: "əˈbɛrənt" }],
+        2: [
+            { word: "admonish", definition: ["to reprove", 
+		"to express warning or disapproval"] },
+            { word: "adroit", definition: ["adept", "dexterous"] }
+        ]
+}
+</pre>
+Every word should have "word" (text) and "definition" (list of texts), but "ipa" (text) and "ex" (list of texts) are optional. When your list is formatted correctly, e-mail me the list in txt format, to <a href="mailto:mistercwon@gmail.com">mistercwon@gmail.com</a>.
+</li>
+	</ul>
+
+                </div>
+       	<div class="site-navigation">
+		<a href="../main/"><button>Main</button></a>
+		<a href="./"><button>Home</button></a>
+		<a href="conjugate.html"><button>Conjugation</button></a>	
+		<a href="help.html"><button>?</button></a>
+	</div>
+    </div>
+
+  </body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Quiz Help</title>
+	<link rel="icon" href="Wicon.ico" type="image/x-icon"> 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            font-size: 1.2em;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        select {
+            padding: 5px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1.2em;
+            box-sizing: border-box; /* Ensure padding is included in width calculation */
+        }
+        button {
+            padding: 12px 24px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+
+	.site-navigation button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #6c3483;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .site-navigation button:hover {
+            background-color: #ddd;
+        }
+
+        .updated-info {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.9em;
+            color: #555;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Word Quiz Help</h1>
+	<ul align="left">
+		<li > Type the correct answer and press Enter (or click "Submit")</li>
+<li> If it's correct, you'll move to the next word. (For Conjugation, you need to get all six answers right)</li>
+<li> Type "a" if you want to be marked correctly anyway. </li>
+<li> Type a number (e.g. 5) and press Enter to jump to that word in the list.</li>
+<li> Use diacritic buttons (é, è, etc.) if needed.</li>
+<li> In test mode, you will be quizzed on every word from the chapter in random order. If you get everything right in a cycle test mode will automatically terminate.</li>
+<li> In test mode, missed answers are tracked and will be tested twice in the next cycle.</li>
+<li> You can toggle between word/definition with the Swap button.</li>
+<li> If you toggle the Random button, the next word will be a random word from the chapter.</li>
+	</ul>
+<hr>
+<ol align="left">
+<li>"GRE" vocab list, definitions, examples are directly from GRE Power Vocab by The Princeton Review. (ISBN: 978-1-101-88178-1) </li>
+<li> "DELF_a2/b1" vocab lists are directly from Édito DELF A2 (2016 Edition, ISBN 978-2-278-08319-0) and B1 (2018 Edition, ISBN 978-2-278-08773-0). </li>
+<li>"Le_petit_prince" vocab list is my excerption from <Le Petit Prince>. </li>
+<li>"Fr_pronoun_ex" is my attempt to familiarise myself with pronoun order in French, and comprises eclectic sources, including ChatGPT's imagination (and my modification to it) and French dubbed Star Wars. </li>
+<li>"Hanja" (한자)는 한국어문회 지정 한자입니다. 한국어문회에서 제공하는 엑셀 파일을 기초로 제가 코딩하여 제 웹사이트의 형식으로 맞춘 것으로, 한자의 훈음 또한 어문회에서 공식으로 제공하는 것을 그대로 따른 것입니다. (훈음이 여러 개거나 장/단음이 모두 가능할 때에는 약간의 오류가 있을 수도 있습니다) Chapter 또한 어문회의 분류기준을 따른 것입니다: <table border="1" style="border-collapse: collapse; text-align: center;">
+  <thead>
+    <tr>
+      <th>코드</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>00</td><td>특급 신습한자</td></tr>
+    <tr><td>02</td><td>특급Ⅱ 신습한자</td></tr>
+    <tr><td>10</td><td>1급 신습한자</td></tr>
+    <tr><td>12</td><td>2급 신습한자중 1급 쓰기 범위에 포함되지 않는 인명지명용 350자</td></tr>
+    <tr><td>20</td><td>2급 신습한자</td></tr>
+    <tr><td>30</td><td>3급 신습한자</td></tr>
+    <tr><td>32</td><td>3급Ⅱ 신습한자</td></tr>
+    <tr><td>40</td><td>4급 신습한자</td></tr>
+    <tr><td>42</td><td>4급Ⅱ 신습한자</td></tr>
+    <tr><td>50</td><td>5급 신습한자</td></tr>
+    <tr><td>52</td><td>5급Ⅱ 신습한자</td></tr>
+    <tr><td>60</td><td>6급 신습한자</td></tr>
+    <tr><td>62</td><td>6급Ⅱ 신습한자</td></tr>
+    <tr><td>70</td><td>7급 신습한자</td></tr>
+    <tr><td>72</td><td>7급Ⅱ 신습한자</td></tr>
+    <tr><td>80</td><td>8급 신습한자</td></tr>
+  </tbody>
+</table>
+
+ 이 중 일부 급수는 제가 급수 내에서 한 Chapter에 20자 정도가 되도록 분할한 것도 있습니다. (예로 "30가"는 3급 신습한자 중 "却 (물리칠 각)"부터 "愧 (부끄러울 괴:)"까지 22자가 포함된 Chapter입니다)</li>
+ 
+
+</ol>
+
+<hr>
+	<ul align="left">
+<li> "Show Answer" will show you the answer. If there are multiple definitions a semi-colon (;) separates them.</li>
+<li> "Show IPA" will show you the pronounciation written in the international phonetic alphabet, if I bothered to add it. "Hanja" (한자)에서는 "Show IPA"를 누루면 한자의 부수와 부수 제외 획수가 나옵니다. </li>
+<li> "Show Ex" will show you example words or sentences, if I bothered to add them. </li>
+<li> Use the word navigation buttons (green) to navigate words within the chapter.</li>
+<li> Use the site navigation buttons (purple) to navigate related websites. </li>
+<li> If you want your list to be added to this website, make sure your list is in the following format: 
+<pre>
+GRE: {
+        1: [
+            { word: "abate", definition: ["to lessen in intensity or degree"], 
+	ipa: "əˈbeɪt", 
+	ex: ["We realized with great relief that the storm had abated before 
+		breaking through the sea wall.", 
+	"Attempts by the administration to abate the intensity of the 
+		controversy were mostly unsuccessful; 
+		it continued to consume everyone's attention.", 
+	"The city's new noise abatement plan targeted live music venues, 
+		but many people felt the focus 
+		should be on decreasing the number of low flying airplanes 
+		passing over the city."] },
+            { word: "abberant", definition: ["deviating from the norm"], 
+	ipa: "əˈbɛrənt" }],
+        2: [
+            { word: "admonish", definition: ["to reprove", 
+		"to express warning or disapproval"] },
+            { word: "adroit", definition: ["adept", "dexterous"] }
+        ]
+}
+</pre>
+Every word should have "word" (text) and "definition" (list of texts), but "ipa" (text) and "ex" (list of texts) are optional. When your list is formatted correctly, e-mail me the list in txt format, to <a href="mailto:mistercwon@gmail.com">mistercwon@gmail.com</a>.
+</li>
+	</ul>
+
+                </div>
+       	<div class="site-navigation">
+		<a href="../main/"><button>Main</button></a>
+		<a href="./"><button>Home</button></a>
+		<a href="conjugate.html"><button>Conjugation</button></a>	
+		<a href="help.html"><button>?</button></a>
+	</div>
+    </div>
+
+  </body>
+</html>
