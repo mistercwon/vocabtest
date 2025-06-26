@@ -84,7 +84,7 @@
         .word-navigation button {
             padding: 10px 20px;
             font-size: 1em;
-            background-color: #2e4053;
+            background-color: #2ecc71;
             border: 1px solid #ccc;
             border-radius: 5px;
             cursor: pointer;
@@ -93,7 +93,14 @@
             background-color: #ddd;
         }
 
-	.test-mode button {
+	.gtest-mode {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+	.gtest-mode button {
             padding: 10px 20px;
             font-size: 1em;
             background-color: #f44336;
@@ -101,19 +108,19 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        .test-mode button:hover {
-            background-color: #ddd;
+        .gtest-mode button:hover {
+            background-color: #bd362d;
         }
 
-	.help button {
+	.site-navigation button {
             padding: 10px 20px;
             font-size: 1em;
-            background-color: #2ecc71;
+            background-color: #6c3483;
             border: 1px solid #ccc;
             border-radius: 5px;
             cursor: pointer;
         }
-        .help button:hover {
+        .site-navigation button:hover {
             background-color: #ddd;
         }
 
@@ -131,8 +138,8 @@
         }
 
 	.test-mode {
-            border: 3px solid #a569bd;
-            background-color: #f7dc6f;
+            border: 3px solid #f44336;
+            background-color: #fff4f4;
         }
 
     </style>
@@ -182,13 +189,16 @@
             <button onclick="insertDiacritic('ü')">ü</button>
         </div>
         <input type="text" id="answer" placeholder="Type your answer here" onkeydown="handleKeyPress(event)">
+		<p id="result"></p>
+        	<p id="word-info"></p>
+	 <button data-action="toggle-answer" onclick="toggleAnswer()">Show Answer</button>
 	<button data-action="toggle-ipa" onclick="showIPA()">Show IPA</button>
 	<button data-action="toggle-ex" onclick="showEx()">Show Ex</button>
-        <button data-action="toggle-answer" onclick="toggleAnswer()">Show Answer</button>
-        <button onclick="checkAnswer()">Submit</button>
-        <button class="test-mode" id="test-mode-btn" onclick="startTestMode()">Test Mode</button>
-        <p id="result"></p>
-        <p id="word-info"></p>
+	<button onclick="checkAnswer()">Submit</button>
+	<div class="gtest-mode">
+        	<button id="test-mode-btn" onclick="startTestMode()">Test Mode</button>
+	</div>
+        	
         <div class="word-navigation">
 	<button id="first-word-btn" onclick="gotoWord(0)"> << </button>
             <button id="prev-word-btn" onclick="navigateWord(-1)">← Previous</button>
@@ -199,9 +209,7 @@
 		<a href="../main/"><button>Main</button></a>
 		<a href="./"><button>Home</button></a>
 		<a href="conjugate.html"><button>Conjugation</button></a>	
-	</div>
-	<div class="help" style="text-align: center; margin-top: 1em;">
-		<button onclick="showHelp()"> ? </button>
+		<a href="help.html"><button>?</button></a>
 	</div>
         <div class="updated-info">
             Last Updated: <span id="last-updated"></span>
@@ -2896,7 +2904,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 26 June 2025-73"; // Static date
+document.getElementById("last-updated").innerText = "Version: 26 June 2025-74"; // Static date
 
 
 
@@ -2935,18 +2943,7 @@ function insertDiacritic(diacritic) {
     inputElement.focus();
 }
 
-function showHelp() {
-    alert(`📘 INSTRUCTIONS:
 
-– Type the correct answer and press Enter.
-– If it's correct, you'll move to the next word.
-– Type a number (e.g. 5) and press Enter to jump to that word in the list.
-– Use diacritic buttons (é, è, etc.) if needed.
-– In test mode, missed answers are tracked.
-– You can toggle between word/definition with the swap button.
-
-Good luck!`);
-}
 
 
 
