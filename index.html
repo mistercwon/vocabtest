@@ -105,6 +105,18 @@
             background-color: #ddd;
         }
 
+	.help-mode button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #2ecc71;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .help-mode button:hover {
+            background-color: #ddd;
+        }
+
 
         .test-mode {
             border: 3px solid #f44336;
@@ -174,7 +186,7 @@
 	<button data-action="toggle-ex" onclick="showEx()">Show Ex</button>
         <button data-action="toggle-answer" onclick="toggleAnswer()">Show Answer</button>
         <button onclick="checkAnswer()">Submit</button>
-        <button id="test-mode-btn" onclick="startTestMode()">Test Mode</button>
+        <button class="btn test-mode-btn" id="test-mode-btn" onclick="startTestMode()">Test Mode</button>
         <p id="result"></p>
         <p id="word-info"></p>
         <div class="word-navigation">
@@ -189,7 +201,7 @@
 		<a href="conjugate.html"><button>Conjugation</button></a>	
 	</div>
 	<div class="help" style="text-align: center; margin-top: 1em;">
-		<button class="btn help-btn" onclick="showHelp()"> ? </button>
+		<button class="help-mode" onclick="showHelp()"> ? </button>
 	</div>
 	</div>
         <div class="updated-info">
