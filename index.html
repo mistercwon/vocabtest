@@ -84,7 +84,7 @@
         .word-navigation button {
             padding: 10px 20px;
             font-size: 1em;
-            background-color: #007BFF;
+            background-color: #2e4053;
             border: 1px solid #ccc;
             border-radius: 5px;
             cursor: pointer;
@@ -92,6 +92,19 @@
         .word-navigation button:hover {
             background-color: #ddd;
         }
+
+	.test-mode button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #f44336;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .test-mode button:hover {
+            background-color: #ddd;
+        }
+
 
         .test-mode {
             border: 3px solid #f44336;
@@ -175,8 +188,8 @@
 		<a href="./"><button>Home</button></a>
 		<a href="conjugate.html"><button>Conjugation</button></a>	
 	</div>
-<div class="help">
-		<button onclick="showHelp()" style="float: right;"> ? </button>
+	<div class="help" style="text-align: center; margin-top: 1em;">
+		<button class="btn help-btn" onclick="showHelp()"> ? </button>
 	</div>
 	</div>
         <div class="updated-info">
@@ -2459,7 +2472,6 @@ const wordLists = {
             document.getElementById("result").innerText = "";
 		document.querySelector('button[data-action="toggle-answer"]').innerText = "Show Answer";
 		document.getElementById("test-mode-btn").innerText = "Test Mode";
-   		document.getElementById("test-mode-btn").style.backgroundColor = "#f44336";
 	document.getElementById("word-info").innerText = `Word ${currentIndex + 1}/${currentWordList.length}`; // Update progress
         }
 
