@@ -175,6 +175,9 @@
 		<a href="./"><button>Home</button></a>
 		<a href="conjugate.html"><button>Conjugation</button></a>	
 	</div>
+<div class="help">
+		<button onclick="showHelp()" style="float: right;"> ? </button>
+	</div>
 	</div>
         <div class="updated-info">
             Last Updated: <span id="last-updated"></span>
@@ -2871,7 +2874,7 @@ function loadTestWord() {
 
 
 
-document.getElementById("last-updated").innerText = "Version: 26 June 2025-72"; // Static date
+document.getElementById("last-updated").innerText = "Version: 26 June 2025-73"; // Static date
 
 
 
@@ -2909,6 +2912,20 @@ function insertDiacritic(diacritic) {
     // Refocus on the input element
     inputElement.focus();
 }
+
+function showHelp() {
+    alert(`📘 INSTRUCTIONS:
+
+– Type the correct answer and press Enter.
+– If it's correct, you'll move to the next word.
+– Type a number (e.g. 5) and press Enter to jump to that word in the list.
+– Use diacritic buttons (é, è, etc.) if needed.
+– In test mode, missed answers are tracked.
+– You can toggle between word/definition with the swap button.
+
+Good luck!`);
+}
+
 
 
         function shuffleArray(array) {
